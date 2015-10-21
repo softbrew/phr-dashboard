@@ -1,0 +1,28 @@
+{
+  "name": "phr_dashboard",
+  "version": "0.0.0",
+  "homepage": "https://github.com/softbrew/phr-dashboard.git",
+  "authors": [
+    "Milan Karunarathne <mhkarunarathne@gmail.com>"
+  ],
+  "description": "ReactJS Patient Dashboard for http://github.com/softbrew/phr-core",
+  "moduleType": [
+    "es6",
+    "node"
+  ],
+  "keywords": [
+    "PHR",
+    "Patient",
+    "Dashboard"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}
