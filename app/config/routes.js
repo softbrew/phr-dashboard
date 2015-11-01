@@ -1,12 +1,14 @@
-var React = require('react');
-var Main = require('../components/Main');
-var Login = require('../components/Login');
-var Profile = require('../components/Profile');
+import React from 'react';
+import Main from '../components/Main';
+import Login from '../components/Login';
+import Profile from '../components/Profile';
 import { Router, IndexRoute, Route, Link } from 'react-router';
 
-module.exports = (
-  <Route path="/" component={Main}>
-    //   <Route path="profile/:username" component={Profile}/>
-      <IndexRoute component={Login}/>
+export default (
+    <Route path="/" component={Main}>
+        <Route
+            path="profile/:username"
+            component={Profile}/>
+        <IndexRoute component={Login}/>
     </Route>
 );
