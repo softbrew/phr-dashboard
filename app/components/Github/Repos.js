@@ -1,21 +1,30 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
+import React, { PropTypes } from 'react';
 
-var Repos = React.createClass({
-    propTypes: {
-        username: PropTypes.string.isRequired,
-        repos: PropTypes.array.isRequired
-    },
-    render: function() {
+class Repos extends React.Component {
+    render () {
+        var repos = this.props.repos.map((repo, index) => {
+            return (
+                <li className="list-group-item" key={index}>
+                    {repo.html_url && <h4></h4>}
+                    {repo.description && <p>{repo.description}</p>}
+                </li>
+            );
+        });
+
         return (
             <div>
-                Repos <br/>
-                Username: {this.props.username} <br/>
-                REPOS: {this.props.repos}
+                <h3>User Repos</h3>
+                <ul className="list-group">
+                    {repos}
+                </ul>
             </div>
         );
     }
+}
 
-});
+Repos.propTypes = {
+    username: PropTypes.string.isRequired,
+    repos: PropTypes.array.isRequired
+};
 
-module.exports = Repos;
+export default Repos;

@@ -1,7 +1,9 @@
 import React from 'react';
-import Router from 'react-router';
+import {render} from 'react-dom';
+import {Router} from 'react-router';
 import routes from './config/routes';
 
-Router.run(routes, (Root, state) => {
+/*Router.render(routes, (Root, state) => {
     React.render(<Root {...state}/>, document.getElementById('app'));
-});
+});*/
+render(<Router>{routes}</Router>, document.getElementById('app'));

@@ -1,11 +1,13 @@
-var React = require('react');
+import React, { PropTypes } from 'react';
 
-var Login = React.createClass({
-  render: function() {
-    return ( < h2 className = "text-center" >
-      Login < /h2>
-    )
-  }
-});
+class Login extends React.Component {
+    render () {
+        return (
+            <h2 className="text-center">
+                Search by Github Username Above
+            </h2>
+        );
+    }
+}
 
-module.exports = Login;
+export default Login;
