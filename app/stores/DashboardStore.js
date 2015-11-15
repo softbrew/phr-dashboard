@@ -1,11 +1,11 @@
-/*
+/**
 * Copyright (c) 2015, Softbrew, Inc.
 * All rights reserved.
 *
 * DashboardStore
  */
 
-"use strict".
+"use strict";
 
 import PHRDispacher from '../dispatcher/PHRDispacher';
 import EventEmitter from 'events';
@@ -16,6 +16,7 @@ let _dashboard = {};
 
 class DashboardStore extends EventEmitter {
     constructor() {
+        super();
         this.CHANGE_EVENT = 'change';
         this.store = {};
     }
