@@ -1,7 +1,7 @@
 module.exports = {
-  entry: "./app/app.js",
+  entry: "./app/App.js",
   output: {
-    path: "./public",
+    path: "./public/js",
     filename: "bundle.js"
   },
   module: {
@@ -10,5 +10,7 @@ module.exports = {
       exclude: /(node_modules|bower_components)/,
       loader: 'babel-loader'
     }]
-  }
+  },
+  debug: true,
+  devtool: 'source-map'
 };
