@@ -14,7 +14,7 @@ class Settings extends React.Component {
     render () {
         return (
             <div className="row">
-                <nav className="navbar navbar-default navbar-fixed-top">
+                <nav className="navbar navbar-default">
                     <div className="container-fluid">
                         {this.renderHeader()}
                         {this.renderLogout()}
