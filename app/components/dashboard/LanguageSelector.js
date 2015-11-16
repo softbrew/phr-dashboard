@@ -9,7 +9,7 @@
 
 import React, { PropTypes } from 'react';
 
-const LanguageSelector = React.createClass({
+class LanguageSelector extends React.Component {
     render () {
         return (
             <div className="row">
@@ -17,6 +17,6 @@ const LanguageSelector = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default LanguageSelector;
