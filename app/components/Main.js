@@ -18,7 +18,7 @@ import DashboardStore from '../stores/DashboardStore';
 const Main = React.createClass({
     render () {
         return (
-            <div>
+            <div className="container-fluid">
                 <Settings></Settings>
                 <Patient></Patient>
                 <LanguageSelector></LanguageSelector>

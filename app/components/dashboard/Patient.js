@@ -12,7 +12,7 @@ import React, { PropTypes } from 'react';
 const Patient = React.createClass({
     render () {
         return (
-            <div>
+            <div className="row">
                 Patient
             </div>
         );
