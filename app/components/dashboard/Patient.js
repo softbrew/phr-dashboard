@@ -13,7 +13,16 @@ const Patient = React.createClass({
     render () {
         return (
             <div className="row">
-                Patient
+                <div className="col-md-10 col-md-offset-1">
+                    <div className="col-md-6">
+                        <h6>Judy W. Gichoya</h6>
+                        <h6>31 years (07/27/2018)</h6>
+                    </div>
+                    <div className="col-md-6">
+                        <h6>ID: 123456</h6>
+                        <h6>Last Updated: 1/1/2015</h6>
+                    </div>
+                </div>
             </div>
         );
     }
