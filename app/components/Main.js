@@ -21,7 +21,11 @@ const Main = React.createClass({
             <div className="container-fluid">
                 <Settings></Settings>
                 <Patient></Patient>
-                <LanguageSelector></LanguageSelector>
+                <footer id="info" className="navbar-fixed-bottom">
+                    <LanguageSelector></LanguageSelector>
+                    <p className="text-center text-muted small">Personal Health Record System
+                        Copyrights at <em><a href="http://www.softbrew.tech/">Softbrew Inc.</a></em></p>
+                </footer>
             </div>
         );
     }
