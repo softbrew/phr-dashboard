@@ -1,25 +1,27 @@
 /**
-* Copyright (c) 2015, Softbrew, Inc.
-* All rights reserved.
-*
-* DashboardStore
+ * Copyright (c) 2015, Softbrew, Inc.
+ * All rights reserved.
+ *
+ * AppsStore
  */
 
 "use strict";
 
 import PHRDispacher from '../dispatcher/PHRDispacher';
 import EventEmitter from 'events';
-import DashboardConstants from '../constants/DashboardConstants';
+import AppsConstants from '../constants/AppsConstants';
+// Sample app data
+import SampleApps from './SampleApps.js';
 
-class DashboardStore extends EventEmitter {
+class AppsStore extends EventEmitter {
     constructor() {
         super();
         this.CHANGE_EVENT = 'change';
-        this.dashboard = {};
+        this.apps = SampleApps.AppList;
     }
 
     getAll() {
-        return this.store;
+        return this.apps;
     }
 
     emitChange() {
@@ -35,15 +37,17 @@ class DashboardStore extends EventEmitter {
     }
 }
 
+let appsStore = new AppsStore();
+
 // Register callback to handle dashboard updates
 PHRDispacher.register(action => {
     switch (action.actionType) {
-        case DashboardConstants.DASHBOARD_CREATE:
-            DashboardStore.emitChange();
+        case AppsConstants.APPS_SHOW:
+            appsStore.emitChange();
             break;
         default:
             console.error(new Error('No operation found.'));
     }
 });
 
-export default DashboardStore;
+export default appsStore;

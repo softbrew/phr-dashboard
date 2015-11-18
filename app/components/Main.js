@@ -11,16 +11,18 @@ import React, { PropTypes } from 'react';
 // import COMPONENTS
 import Settings from './dashboard/Settings';
 import Patient from './dashboard/Patient';
+import CardList from './apps/CardList';
 import LanguageSelector from './dashboard/LanguageSelector';
 // import  STORES
 import DashboardStore from '../stores/DashboardStore';
 
-const Main = React.createClass({
+class Main extends React.Component {
     render () {
         return (
             <div className="container-fluid">
                 <Settings></Settings>
                 <Patient></Patient>
+                <CardList></CardList>
                 <footer id="info" className="navbar-fixed-bottom">
                     <LanguageSelector></LanguageSelector>
                     <p className="text-center text-muted small">Personal Health Record System
@@ -29,6 +31,6 @@ const Main = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default Main;
