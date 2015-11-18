@@ -9,7 +9,7 @@
 
 import React, { PropTypes } from 'react';
 
-const Patient = React.createClass({
+class Patient extends React.Component {
     render () {
         return (
             <div className="row">
@@ -34,6 +34,6 @@ const Patient = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default Patient;
