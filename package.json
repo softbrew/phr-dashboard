@@ -16,6 +16,7 @@
     "babel-loader": "^5.3.2"
   },
   "scripts": {
+    "webpack": "webpack -w",  
     "test": "npm test"
   },
   "repository": {
