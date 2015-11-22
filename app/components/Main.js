@@ -11,7 +11,6 @@ import React, { PropTypes } from 'react';
 // import COMPONENTS
 import Settings from './dashboard/Settings';
 import Patient from './dashboard/Patient';
-import CardList from './apps/CardList';
 import LanguageSelector from './dashboard/LanguageSelector';
 // import  STORES
 import DashboardStore from '../stores/DashboardStore';
@@ -22,7 +21,7 @@ class Main extends React.Component {
             <div className="container-fluid">
                 <Settings></Settings>
                 <Patient></Patient>
-                <CardList></CardList>
+                {this.props.children}
                 <footer id="info" className="navbar-fixed-bottom">
                     <LanguageSelector></LanguageSelector>
                     <p className="text-center text-muted small">Personal Health Record System
