@@ -8,6 +8,8 @@ let SampleApps = {
                 "large": "https://lh3.googleusercontent.com/N-AY2XwXafWq4TQWfua6VyjPVQvTGRdz9CKOHaBl2nu2GVg7zxS886X5giZ9yY2qIjPh=w340-rw",
                 "small": "https://lh3.googleusercontent.com/N-AY2XwXafWq4TQWfua6VyjPVQvTGRdz9CKOHaBl2nu2GVg7zxS886X5giZ9yY2qIjPh=w170-rw"
             },
+            "appId": "medical_record",
+            "devId": "softbrew",
             "reason-set": {
                 "stars": 4.5,
                 "price": {
@@ -24,6 +26,8 @@ let SampleApps = {
                 "large": "https://lh3.googleusercontent.com/N-AY2XwXafWq4TQWfua6VyjPVQvTGRdz9CKOHaBl2nu2GVg7zxS886X5giZ9yY2qIjPh=w340-rw",
                 "small": "https://lh3.googleusercontent.com/N-AY2XwXafWq4TQWfua6VyjPVQvTGRdz9CKOHaBl2nu2GVg7zxS886X5giZ9yY2qIjPh=w170-rw"
             },
+            "appId": "appointments",
+            "devId": "softbrew",
             "reason-set": {
                 "stars": 4.4,
                 "price": {
@@ -40,6 +44,8 @@ let SampleApps = {
                 "large": "https://lh3.googleusercontent.com/N-AY2XwXafWq4TQWfua6VyjPVQvTGRdz9CKOHaBl2nu2GVg7zxS886X5giZ9yY2qIjPh=w340-rw",
                 "small": "https://lh3.googleusercontent.com/N-AY2XwXafWq4TQWfua6VyjPVQvTGRdz9CKOHaBl2nu2GVg7zxS886X5giZ9yY2qIjPh=w170-rw"
             },
+            "appId": "journal",
+            "devId": "softbrew",
             "reason-set": {
                 "stars": 4.0,
                 "price": {

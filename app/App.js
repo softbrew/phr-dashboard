@@ -9,6 +9,8 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import Main from './components/Main';
+import { Router, Route, Link, IndexRoute } from 'react-router';
 
-render(<Main></Main>, document.getElementById('app'));
+import routes from './config/routes';
+
+render(<Router>{routes}</Router>, document.getElementById('app'));
