@@ -3,7 +3,7 @@ let SampleApps = {
         {
             "title": "Medical Records",
             "subtitle": "Sfotbrew Inc.",
-            "description": "Show your medical records.",
+            "description": "Show your medical records. Out too the been like hard off. Improve enquire welcome own beloved matters her. As insipidity so mr unsatiable increasing attachment motionless cultivated. Addition mr husbands unpacked occasion he oh. Is unsatiable if projecting boisterous insensible. It recommend be resolving pretended middleton.",
             "coverImage": {
                 "large": "https://lh3.googleusercontent.com/N-AY2XwXafWq4TQWfua6VyjPVQvTGRdz9CKOHaBl2nu2GVg7zxS886X5giZ9yY2qIjPh=w340-rw",
                 "small": "https://lh3.googleusercontent.com/N-AY2XwXafWq4TQWfua6VyjPVQvTGRdz9CKOHaBl2nu2GVg7zxS886X5giZ9yY2qIjPh=w170-rw"

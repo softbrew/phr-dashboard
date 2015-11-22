@@ -14,16 +14,23 @@ class CardList extends React.Component {
 
     render () {
         var cards = this.props.appList.map((card, index) => {
-            return <li className="media" key={index}>
-                <Card card={card}></Card>
-            </li>;
+            return <Card card={card} key={index}></Card>;
         });
+        var cardsList = [];
+        for(let i =0; i < cards.length/2;i++) {
+            cardsList.push(<div className="row" key={i}>
+                <div className="col-md-4 col-md-offset-1">
+                    {cards[i * 2]}
+                </div>
+                <div className="col-md-4 col-md-offset-1">
+                    {cards[i *2 + 1]}
+                </div>
+            </div>);
+        }
 
         return (
             <div className="row">
-                <div className="media-list">
-                    {cards}
-                </div>
+                {cardsList}
             </div>
         );
     }
