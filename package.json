@@ -14,7 +14,8 @@
     "webpack": "^1.12.9"
   },
   "devDependencies": {
-    "babel-loader": "^5.3.2"
+    "babel-loader": "^5.3.2",
+    "copy-webpack-plugin": "^0.3.3"
   },
   "scripts": {
     "webpack": "webpack -w",
