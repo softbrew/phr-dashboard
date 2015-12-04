@@ -2,9 +2,7 @@
  * Copyright (c) 2015, Softbrew Inc.
  * All rights reserved.
  *
- * PHRDispacher
- *
- * A singleton that operates as the central hub for application updates.
+ * DashboardActions
  */
 
 "use strict";
@@ -22,7 +20,7 @@ class DashboardActions {
      * @param  {object} bio FHIR Patient object
      * @return {null}     Nothing
      */
-    create(bio) {
+    static create(bio) {
         PHRDispacher.dispatch({
             actionType: DashboardConstants.DASHBOARD_CREATE,
             bio: bio

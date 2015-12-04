@@ -1,29 +1,23 @@
 /*
-* Copyright (c) 2015, Softbrew, Inc.
-* All rights reserved.
-*
-* Login: Main React Component
+ * Copyright (c) 2015, Softbrew, Inc.
+ * All rights reserved.
+ *
+ * Login: Main React Component
  */
 
 "use strict";
 
 import React, { PropTypes } from 'react';
 // import COMPONENTS
-import Settings from './dashboard/Settings';
-import Patient from './dashboard/Patient';
-import LanguageSelector from './dashboard/LanguageSelector';
 // import  STORES
-import DashboardStore from '../stores/DashboardStore';
+import SignUpStore from '../stores/SignUpStore';
 
 class Main extends React.Component {
-    render () {
+    render() {
         return (
             <div className="container-fluid">
-                <Settings></Settings>
-                <Patient></Patient>
                 {this.props.children}
                 <footer id="info" className="navbar-fixed-bottom">
-                    <LanguageSelector></LanguageSelector>
                     <p className="text-center text-muted small">Personal Health Record System
                         Copyrights at <em><a href="http://www.softbrew.tech/">Softbrew Inc.</a></em></p>
                 </footer>
