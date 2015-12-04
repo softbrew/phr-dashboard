@@ -2,12 +2,12 @@
  * Copyright (c) 2015, Softbrew Inc.
  * All rights reserved.
  *
- * PHRDispacher
+ * LoginDispatcher
  *
  * A singleton that operates as the central hub for application updates.
  */
 
-"use strict";
+'use strict';
 
 import {Dispatcher} from 'flux';
 

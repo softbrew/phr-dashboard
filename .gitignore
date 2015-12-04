@@ -1,5 +1,5 @@
 # Project Settings
-bundle.*
+public/js
 
 # Logs
 logs

@@ -7,7 +7,7 @@
 
 "use strict";
 
-import PHRDispacher from '../dispatcher/PHRDispacher';
+import PHRDispacher from '../dispatcher/PHRDispatcher';
 import EventEmitter from 'events';
 import AppsConstants from '../constants/AppsConstants';
 // Sample app data
