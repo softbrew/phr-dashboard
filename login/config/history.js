@@ -1,5 +1,5 @@
 'use strict';
 
-import createBrowserHistory from 'history/lib/createBrowserHistory';
+import createHashHistory from 'history/lib/createHashHistory';
 
-export default createBrowserHistory();
+export default createHashHistory();

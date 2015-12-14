@@ -16,16 +16,22 @@ class SignUpStore extends EventEmitter {
         super();
         this.CHANGE_EVENT = 'change';
         this.patient = null;
+        this.isImport = false;
     }
 
     // Private Methods (NOTE: Components should not update store's data)
     _setPatient(patient) {
         this.patient = patient;
+        this.isImport = true;
     }
 
     // Public Methods
     getAll() {
         return this.patient;
+    }
+
+    isPatientImported() {
+        return this.isImport;
     }
 
     emitChange() {
@@ -49,6 +55,9 @@ PHRDispacher.register(action => {
         case SignUpConstants.SIGNUP_IMPORT:
             signUpStore._setPatient(action.patient);
             signUpStore.emitChange();
+            break;
+        case SignUpConstants.SIGNUP_IMPORT_FAIL:
+            console.log('SIGNUP_IMPORT_FAIL :', action.error);
             break;
         default:
             console.error(new Error('No operation found.'));

@@ -39,13 +39,18 @@ class SignUpActions {
                 actionType: SignUpConstants.SIGNUP_IMPORT,
                 patient: res.data
             });
+            //history.pushState(null, '/new');
         }).catch(err => {
-            console.error(err);
+            console.log(err);
             LoginDispatcher.dispatch({
                 actionType: SignUpConstants.SIGNUP_IMPORT_FAIL,
                 error: err.data
             });
         });
+    }
+
+    static signUp(data) {
+        console.log('SignUp: ', data);
     }
 }
 
