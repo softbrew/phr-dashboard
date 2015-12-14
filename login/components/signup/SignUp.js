@@ -1,6 +1,20 @@
 import React, { PropTypes } from 'react';
 
+import SignUpStore from '../../stores/SignUpStore';
+
 class SignUp extends React.Component {
+    constructor() {
+        super();
+    }
+
+    componentDidMount() {
+        SignUpStore.addChangeListener(this._onChange());
+    }
+
+    componentWillUnmount() {
+        SignUpStore.removeChangeListener(this._onChange());
+    }
+
     render() {
         return (
             <div className="row">
@@ -26,6 +40,12 @@ class SignUp extends React.Component {
             </div>
         );
     }
+
+    _onChange() {
+        this.props.history.pushState(null, '')
+    }
 }
+
+
 
 export default SignUp;

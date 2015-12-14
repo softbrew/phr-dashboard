@@ -1,5 +1,3 @@
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-
 module.exports = {
     entry: {
         app: './app/App.js',
