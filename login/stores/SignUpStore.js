@@ -40,10 +40,12 @@ class SignUpStore extends EventEmitter {
 
     addChangeListener(callback) {
         this.on(this.CHANGE_EVENT, callback);
+        // return this.listeners(this.CHANGE_EVENT);
     }
 
     removeChangeListener(callback) {
         this.removeListener(this.CHANGE_EVENT, callback);
+        // return this.listeners(this.CHANGE_EVENT);
     }
 }
 

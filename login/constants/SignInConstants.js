@@ -8,5 +8,6 @@
 "use strict";
 
 export default {
-    SIGNIN_ABC: 'SIGNIN_ABC'
+    SIGNIN_SUCCESS: 'SIGNIN_SUCCESS',
+    SIGNIN_FAIL: 'SIGNIN_FAIL'
 };

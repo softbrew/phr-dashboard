@@ -51,6 +51,22 @@ class SignUpActions {
 
     static signUp(data) {
         console.log('SignUp: ', data);
+        axios.post('user/signin', {
+            email: data.email,
+            password: data.password
+        }).then(res => {
+            console.log('SignUp res: ', res);
+            LoginDispatcher.dispatch({
+                actionType: SignUpConstants.SIGNUP_SUCCESS,
+                token: res.data
+            });
+        }).catch(err => {
+            console.error(err);
+            LoginDispatcher.dispatch({
+                actionType: SignUpConstants.SIGNUP_FAIL,
+                error: err.data
+            });
+        });
     }
 }
 

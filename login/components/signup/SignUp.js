@@ -14,11 +14,15 @@ class SignUp extends React.Component {
     }
 
     componentDidMount() {
-        SignUpStore.addChangeListener(this._onChange.bind(this));
+        // If patient details unavailable, redirect to SetUp page
+        if(!this.state.isPatientImported){
+            this.props.history.replaceState(null, '/setup');
+        }
+        SignUpStore.addChangeListener(this._onSubmit.bind(this));
     }
 
     componentWillUnmount() {
-        SignUpStore.removeChangeListener(this._onChange.bind(this));
+        SignUpStore.removeChangeListener(this._onSubmit.bind(this));
     }
 
     render() {
@@ -27,6 +31,10 @@ class SignUp extends React.Component {
             <div className="col-md-4 col-md-offset-4">
                 <form className="from">
                     <h2 className="form-signin-heading">Sign Up</h2>
+                    <div className="form-group">
+                        <label htmlFor="inputUsername" className="">Username</label>
+                        <input type="text" id="inputUsername" ref={(username) => {this.username = username;}} className="form-control" placeholder="Ex. johnsmith" required autofocus></input>
+                    </div>
                     <div className="form-group">
                         <label htmlFor="inputEmail" className="">Email address</label>
                         <input type="email" id="inputEmail" ref={(email) => {this.email = email;}} className="form-control" placeholder="Email address" required autofocus></input>
@@ -54,7 +62,8 @@ class SignUp extends React.Component {
         e.preventDefault();
         SignUpActions.signUp({
             email: this.email.value,
-            password: this.password.value
+            password: this.password.value,
+            patient: this.state.patient
         });
     }
 }

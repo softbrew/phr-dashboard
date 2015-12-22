@@ -56,7 +56,9 @@ class SetUp extends React.Component {
             isPatientImported : SignUpStore.isPatientImported(),
             patient : SignUpStore.getAll()
         });
-        this.props.history.pushState(null, '/new');
+        if(this.state.isPatientImported) {
+            this.props.history.replaceState(null, '/new');
+        }   
     }
 }
 
