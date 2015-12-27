@@ -7,10 +7,7 @@ import SignUpStore from '../../stores/SignUpStore';
 class SignUp extends React.Component {
     constructor() {
         super();
-        this.state = {
-            isPatientImported : SignUpStore.isPatientImported(),
-            patient : SignUpStore.getAll()
-        };
+        this.state = SignUpStore.getAll();
     }
 
     componentDidMount() {
@@ -18,11 +15,13 @@ class SignUp extends React.Component {
         if(!this.state.isPatientImported){
             this.props.history.replaceState(null, '/setup');
         }
-        SignUpStore.addChangeListener(this._onSubmit.bind(this));
+        SignUpStore.addChangeListener(this._onSignUpSuccess.bind(this));
+        SignUpStore.addFailListener(this._onSignUpFail.bind(this));
     }
 
     componentWillUnmount() {
-        SignUpStore.removeChangeListener(this._onSubmit.bind(this));
+        SignUpStore.removeChangeListener(this._onSignUpSuccess.bind(this));
+        SignUpStore.removeFailListener(this._onSignUpFail.bind(this));
     }
 
     render() {
@@ -59,12 +58,33 @@ class SignUp extends React.Component {
     }
 
     _onSubmit(e) {
+        console.log('_onSubmit');
         e.preventDefault();
         SignUpActions.signUp({
+            username: this.username.value,
             email: this.email.value,
             password: this.password.value,
-            patient: this.state.patient
+            patient: this.state.patient,
         });
+    }
+
+    _onSignUpSuccess() {
+        console.log('_onSignUpSuccess');
+        this.setState(SignUpStore.getAll());
+        if(this.state.token) {
+            window.location = '/public/index.html';
+        }
+    }
+
+    _onSignUpFail() {
+        let error = SignUpStore.getError();
+        console.log('_onSignUpFail: ', error);
+        if(error.error.error === 'conflict') {
+            alert('Given username already exists. Please, login with username after redirect to login page.');
+            setTimeout(() => {
+                this.props.history.replaceState(null, '/');
+            }, 1000);
+        }
     }
 }
 

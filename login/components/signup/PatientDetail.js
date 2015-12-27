@@ -14,7 +14,7 @@ class PatientDetail extends React.Component {
                     </dl>}
                     {patient.name && <dl className="dl-horizontal">
                         <dt>Name</dt>
-                        <dd>{`${patient.name[0].given.toString().replace(/,/g,' ')} ${patient.name[0].family.toString()}`}</dd>
+                        <dd>{`${patient.name.given} ${patient.name.family}`}</dd>
                     </dl>}
                     {patient.gender && <dl className="dl-horizontal">
                         <dt>Gender</dt>
@@ -28,10 +28,10 @@ class PatientDetail extends React.Component {
                         <dt>Address</dt>
                         <dd>
                             <address>
-                                <strong>{patient.address[0].use.toUpperCase()}</strong><br/>
-                                {patient.address[0].line.toString()}<br/>
-                                {`${patient.address[0].city}, ${patient.address[0].state}. ${patient.address[0].postalCode}`}<br/>
-                                <abbr title="Phone">P:</abbr> {patient.telecom[1].value}
+                                <strong>{patient.address.use}</strong><br/>
+                                {patient.address.line}<br/>
+                                {`${patient.address.city}, ${patient.address.state}. ${patient.address.postalCode}`}<br/>
+                                <abbr title="Phone">P:</abbr> {patient.telecom}
                             </address>
                         </dd>
                     </dl>}

@@ -34,14 +34,32 @@ class SignUpActions {
             baseURL: baseURL,
             patientId: patientId
         }).then(res => {
-            console.log('patient: ', res.data);
+            let data = res.data;
+            let patient = {
+                id: data.id,
+                name: {
+                    given: data.name[0].given.toString().replace(/,/g,' '),
+                    family: data.name[0].family.toString()
+                },
+                gender: data.gender,
+                birthDate: data.birthDate,
+                address: {
+                    use: data.address[0].use.toUpperCase(),
+                    line: data.address[0].line.toString(),
+                    city:data.address[0].city,
+                    state:data.address[0].state,
+                    postalCode:data.address[0].postalCode
+                },
+                telecom: data.telecom[1].value
+            };
+            console.log('Patient: ', patient);
             LoginDispatcher.dispatch({
                 actionType: SignUpConstants.SIGNUP_IMPORT,
-                patient: res.data
+                patient: patient
             });
             //history.pushState(null, '/new');
         }).catch(err => {
-            console.log(err);
+            console.error(err);
             LoginDispatcher.dispatch({
                 actionType: SignUpConstants.SIGNUP_IMPORT_FAIL,
                 error: err.data
@@ -51,17 +69,14 @@ class SignUpActions {
 
     static signUp(data) {
         console.log('SignUp: ', data);
-        axios.post('user/signin', {
-            email: data.email,
-            password: data.password
-        }).then(res => {
+        axios.post('/user/signup', data).then(res => {
             console.log('SignUp res: ', res);
             LoginDispatcher.dispatch({
                 actionType: SignUpConstants.SIGNUP_SUCCESS,
-                token: res.data
+                token: res.data.token
             });
         }).catch(err => {
-            console.error(err);
+            console.error(err, err.data);
             LoginDispatcher.dispatch({
                 actionType: SignUpConstants.SIGNUP_FAIL,
                 error: err.data
