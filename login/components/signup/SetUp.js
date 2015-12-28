@@ -18,6 +18,7 @@ class SetUp extends React.Component {
     }
 
     componentWillUnmount() {
+        console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$');
         SignUpStore.removeChangeListener(this._onImportPatient.bind(this));
     }
 
@@ -52,13 +53,10 @@ class SetUp extends React.Component {
     }
 
     _onImportPatient() {
-        this.setState({
-            isPatientImported : SignUpStore.isPatientImported(),
-            patient : SignUpStore.getAll()
-        });
+        this.setState(SignUpStore.getAll());
         if(this.state.isPatientImported) {
             this.props.history.replaceState(null, '/new');
-        }   
+        }
     }
 }
 
