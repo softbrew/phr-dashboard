@@ -11,7 +11,6 @@ import axios from 'axios';
 
 import LoginDispatcher from '../dispatcher/LoginDispatcher';
 import SignUpConstants from '../constants/SignUpConstants';
-import history from '../config/history';
 
 class SignUpActions {
     constructor() {    }
@@ -57,7 +56,6 @@ class SignUpActions {
                 actionType: SignUpConstants.SIGNUP_IMPORT,
                 patient: patient
             });
-            //history.pushState(null, '/new');
         }).catch(err => {
             console.error(err);
             LoginDispatcher.dispatch({
@@ -73,7 +71,8 @@ class SignUpActions {
             console.log('SignUp res: ', res);
             LoginDispatcher.dispatch({
                 actionType: SignUpConstants.SIGNUP_SUCCESS,
-                token: res.data.token
+                token: res.data.token,
+                user: res.data.user
             });
         }).catch(err => {
             console.error(err, err.data);

@@ -18,7 +18,6 @@ class SetUp extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$');
         SignUpStore.removeChangeListener(this._onImportPatient.bind(this));
     }
 
