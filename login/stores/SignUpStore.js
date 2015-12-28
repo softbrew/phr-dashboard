@@ -19,6 +19,7 @@ class SignUpStore extends EventEmitter {
         this.patient = null;
         this.isImported = false;
         this.token = null;
+        this.error = null;
     }
 
     // Private Methods (NOTE: Components should not update store's data)
@@ -42,6 +43,9 @@ class SignUpStore extends EventEmitter {
     }
 
     // Public Methods
+    isPatientImported() {
+        return this.isImported;
+    }
     getAll() {
         return {
             patient : this.patient,
@@ -49,11 +53,11 @@ class SignUpStore extends EventEmitter {
             token: this.token
         };
     }
-    isPatientImported() {
-        return this.isImported;
-    }
     getToken() {
         return this.token;
+    }
+    getPatient() {
+        return this.patient;
     }
     getError() {
         let error = {
@@ -73,15 +77,14 @@ class SignUpStore extends EventEmitter {
 
     addChangeListener(callback) {
         this.on(this.CHANGE_EVENT, callback);
-        // return this.listeners(this.CHANGE_EVENT);
     }
     addFailListener(callback) {
         this.on(this.FAIL_EVENT, callback);
     }
 
     removeChangeListener(callback) {
-        this.removeListener(this.CHANGE_EVENT, callback);
-        // return this.listeners(this.CHANGE_EVENT);
+        // NOTE: this.removeListener(event); isn't working properly
+        this.removeAllListeners(this.CHANGE_EVENT);
     }
     removeFailListener(callback) {
         this.removeListener(this.FAIL_EVENT, callback);

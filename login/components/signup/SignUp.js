@@ -81,9 +81,7 @@ class SignUp extends React.Component {
         console.log('_onSignUpFail: ', error);
         if(error.error.error === 'conflict') {
             alert('Given username already exists. Please, login with username after redirect to login page.');
-            setTimeout(() => {
-                this.props.history.replaceState(null, '/');
-            }, 1000);
+            this.props.history.replaceState(null, '/');
         }
     }
 }
