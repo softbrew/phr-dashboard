@@ -1,23 +1,43 @@
 /*
-* Copyright (c) 2015, Softbrew, Inc.
-* All rights reserved.
-*
-* Main React Component
+ * Copyright (c) 2015, Softbrew, Inc.
+ * All rights reserved.
+ *
+ * Main React Component
  */
 
 "use strict";
 
-import React, { PropTypes } from 'react';
+import React, {
+    PropTypes
+}
+from 'react';
 // import COMPONENTS
 import Settings from './dashboard/Settings';
 import Patient from './dashboard/Patient';
 import LanguageSelector from './dashboard/LanguageSelector';
+// import ACTIONS
+import DashboardActions from '../actions/DashboardActions';
 // import  STORES
 import DashboardStore from '../stores/DashboardStore';
+import SessionStore from '../stores/SessionStore';
 
 class Main extends React.Component {
-    render () {
-        return (
+    constructor() {
+        super();
+        this.state = SessionStore.getAll();
+    }
+
+    componentDidMount() {
+        SessionStore.addChangeListener(this._onChange.bind(this));
+        DashboardActions.getSession();
+    }
+
+    componentWillUnmount() {
+        SessionStore.removeChangeListener(this._onChange.bind(this));
+    }
+
+    render() {
+        return(
             <div className="container-fluid">
                 <Settings></Settings>
                 <Patient></Patient>
@@ -30,6 +50,16 @@ class Main extends React.Component {
             </div>
         );
     }
+
+    _onChange() {
+        console.log('_onChange: ', SessionStore.getAll());
+        this.setState(SessionStore.getAll());
+        if(this.state.token.length < 1) {
+            alert('Your session expired. Please, login again.');
+            //window.location = '/public/login.html';
+        }
+    }
+
 }
 
 export default Main;

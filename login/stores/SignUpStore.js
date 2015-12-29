@@ -19,8 +19,13 @@ class SignUpStore extends EventEmitter {
         this.FAIL_EVENT = 'fail';
         this.patient = null;
         this.isImported = false;
-        this.token = null;
         this.error = null;
+        if(typeof(Storage) !== "undefined") {
+            this.token = localStorage.getItem('token') || '';
+            this.user = JSON.parse(localStorage.getItem('user'));
+        } else {
+            console.log('No Web Storage support..');
+        }
     }
 
     // Private Methods (NOTE: Components should not update store's data)
@@ -31,7 +36,7 @@ class SignUpStore extends EventEmitter {
     _setToken(token) {
         this.token = token;
         if(typeof(Storage) !== "undefined") {
-            window.localStorage.setItem('token', token);
+            localStorage.setItem('token', token);
         } else {
             console.log('No Web Storage support..');
         }
@@ -39,7 +44,7 @@ class SignUpStore extends EventEmitter {
     _setUser(user) {
         this.user = user;
         if(typeof(Storage) !== "undefined") {
-            window.localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(user));
         } else {
             console.log('No Web Storage support..');
         }
@@ -140,10 +145,8 @@ PHRDispacher.register(action => {
             signUpStore._setError(action.actionType, action.error);
             signUpStore.emitFail();
             break;
-        default:
-            console.error(new Error('No operation found.'));
-            break;
     }
+    return true;
 });
 
 export default signUpStore;

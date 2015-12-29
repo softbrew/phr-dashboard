@@ -41,9 +41,8 @@ PHRDispacher.register(action => {
         case DashboardConstants.DASHBOARD_CREATE:
             DashboardStore.emitChange();
             break;
-        default:
-            console.error(new Error('No operation found.'));
     }
+    return true;
 });
 
 export default DashboardStore;
