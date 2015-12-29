@@ -45,9 +45,8 @@ PHRDispacher.register(action => {
         case AppsConstants.APPS_SHOW:
             appsStore.emitChange();
             break;
-        default:
-            console.error(new Error('No operation found.'));
     }
+    return true;
 });
 
 export default appsStore;
