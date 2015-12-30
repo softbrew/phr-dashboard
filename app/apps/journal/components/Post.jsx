@@ -2,22 +2,23 @@
  * Copyright (c) 2015, Softbrew, Inc.
  * All rights reserved.
  *
- * Journal React Component
+ * Journal Post React Component
  */
 
 "use strict";
 
 import React, { PropTypes } from 'react';
 
-class Journal extends React.Component {
+class Post extends React.Component {
     render () {
         return (
-            <div>Journal</div>
+            <div>Post</div>
         );
     }
 }
 
-Journal.propTypes = {
+Post.PropTypes = {
+
 };
 
-export default Journal;
+export default Post;

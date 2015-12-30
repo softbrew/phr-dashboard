@@ -16,12 +16,23 @@ import SampleApps from './SampleApps.js';
 class AppsStore extends EventEmitter {
     constructor() {
         super();
-        this.CHANGE_EVENT = 'change';
+        this.CHANGE_EVENT = 'apps_store_change';
         this.apps = SampleApps.AppList;
+        this.activeApp = {};
+    }
+
+    _setApps(apps) {
+        this.apps = apps;
+    }
+    _setActiveApp(app) {
+        this.activeApp = app;
     }
 
     getAll() {
         return this.apps;
+    }
+    getActiveApp() {
+        return this.activeApp;
     }
 
     emitChange() {
@@ -33,7 +44,8 @@ class AppsStore extends EventEmitter {
     }
 
     removeChangeListener(callback) {
-        this.removeListener(this.CHANGE_EVENT, callback);
+        // TODO: Error in Event Emitter
+        this.removeAllListeners(this.CHANGE_EVENT, callback);
     }
 }
 
@@ -43,6 +55,13 @@ let appsStore = new AppsStore();
 PHRDispacher.register(action => {
     switch (action.actionType) {
         case AppsConstants.APPS_SHOW:
+            console.log('AppsStore APPS_SHOW');
+            appsStore._setApps(action.apps);
+            appsStore.emitChange();
+            break;
+        case AppsConstants.CHANGE_ACTIVE_APP:
+            console.log('AppsStore CHANGE_ACTIVE_APP');
+            appsStore._setActiveApp(action.app);
             appsStore.emitChange();
             break;
     }
