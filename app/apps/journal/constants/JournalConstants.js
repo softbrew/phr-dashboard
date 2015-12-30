@@ -8,5 +8,6 @@
 "use strict";
 
 export default {
-    APP_ID: 'journal'
+    APP_ID: 'journal',
+    UPDATE_POSTS: 'UPDATE_POSTS'
 };

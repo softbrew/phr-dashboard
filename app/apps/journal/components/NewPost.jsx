@@ -12,6 +12,13 @@ import React, { PropTypes } from 'react';
 import JournalActions from '../actions/JournalActions';
 
 class NewPost extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            previousPost: ''
+        };
+    }
+
     render() {
         return(
             <div className="row">
@@ -31,11 +38,13 @@ class NewPost extends React.Component {
         console.log('NewPost _onNewPost');
         e.preventDefault();
         JournalActions.newPost(this.newPost.value);
+        this.setState({
+            previousPost: this.newPost.value
+        });
     }
 }
 
 NewPost.PropTypes = {
-
 };
 
 export default NewPost;

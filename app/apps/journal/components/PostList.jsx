@@ -7,22 +7,32 @@
 
 "use strict";
 
-import React, { PropTypes } from 'react';
+import React, {
+    PropTypes
+}
+from 'react';
 // import Component
 import Post from './Post.jsx';
 
 class PostList extends React.Component {
-    render () {
-        return (
+    constructor() {
+        super();
+    }
+    render() {
+        var posts = this.props.postList.map((post, index) => {
+            return <Post post={post} key={index}></Post>;
+        });
+
+        return(
             <div>
-                <Post></Post>
+                {posts}
             </div>
         );
     }
 }
 
 PostList.PropTypes = {
-
+    postList: PropTypes.array.isRequired
 };
 
 export default PostList;

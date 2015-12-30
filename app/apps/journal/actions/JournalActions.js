@@ -33,6 +33,22 @@ class JournalActions extends BaseActions {
 
         });
     }
+
+    static getPosts() {
+        console.log('JournalActions getPosts');
+        axios.get(`/apps/${JournalConstants.APP_ID}/${this.getUser().username}`, {
+            headers: this.getHeaders()
+        }).then(res => {
+            console.log('/apps getPosts : ', res);
+            Dispacher.dispatch({
+                actionType: JournalConstants.UPDATE_POSTS,
+                posts: res.data
+            });
+        }).catch(err => {
+            console.error(err);
+
+        });
+    }
 }
 
 export default JournalActions;
