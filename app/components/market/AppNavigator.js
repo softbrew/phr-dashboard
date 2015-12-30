@@ -29,14 +29,16 @@ class AppNavigator extends React.Component {
 
     render () {
         return (
-            <div className="row">
-                <ol className="breadcrumb">
-                    <li><a className="glyphicon glyphicon-home" href="#"></a></li>
-                    <li><a href="#">Apps</a></li>
-                    <li className="active">{this.state.activeApp.title}</li>
-                </ol>
+            <div>
+                <div className="row">
+                    <ol className="breadcrumb">
+                        <li><a className="glyphicon glyphicon-home" href="#"></a></li>
+                        <li><a href="#">Apps</a></li>
+                        <li className="active">{this.state.activeApp.title}</li>
+                    </ol>
+                </div>
                 {this.props.children}
-            </div>
+        </div>
         );
     }
 
