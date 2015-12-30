@@ -56,7 +56,7 @@ class Main extends React.Component {
         this.setState(SessionStore.getAll());
         if(this.state.token.length < 1) {
             alert('Your session expired. Please, login again.');
-            //window.location = '/public/login.html';
+            window.location = '/public/login.html';
         }
     }
 
