@@ -17,10 +17,7 @@ import PostList from './components/PostList.jsx';
 class Journal extends React.Component {
     render () {
         return (
-            <div className="row">
-                <NewPost></NewPost>
-                <PostList></PostList>
-            </div>
+            <NewPost></NewPost>
         );
     }
 }
