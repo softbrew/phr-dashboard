@@ -10,9 +10,9 @@ import CardList from '../components/market/CardList';
 import AppNavigator from '../components/market/AppNavigator';
 
 // import APPS
-import Appointments from '../components/apps/appointments/Appointments';
-import MedicalRecord from '../components/apps/medical_record/MedicalRecord';
-import Journal from '../components/apps/journal/Journal';
+import Appointments from '../apps/appointments/index';
+import MedicalRecord from '../apps/medical_record/index';
+import Journal from '../apps/journal/index';
 
 export default (
     <Route path='/' component={Main}>

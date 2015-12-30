@@ -18,10 +18,21 @@ class AppsStore extends EventEmitter {
         super();
         this.CHANGE_EVENT = 'change';
         this.apps = SampleApps.AppList;
+        this.activeApp = {};
+    }
+
+    _setApps(apps) {
+        this.apps = apps;
+    }
+    _setActiveApp(app) {
+        this.activeApp = app;
     }
 
     getAll() {
         return this.apps;
+    }
+    getActiveApp() {
+        return this.activeApp;
     }
 
     emitChange() {
@@ -43,6 +54,11 @@ let appsStore = new AppsStore();
 PHRDispacher.register(action => {
     switch (action.actionType) {
         case AppsConstants.APPS_SHOW:
+            appsStore._setApps(action.apps);
+            appsStore.emitChange();
+            break;
+        case AppsConstants.CHANGE_ACTIVE_APP:
+            appsStore._setActiveApp(action.app);
             appsStore.emitChange();
             break;
     }

@@ -8,5 +8,6 @@
 "use strict";
 
 export default {
-    DASHBOARD_CREATE: 'DASHBOARD_CREATE'
+    APPS_SHOW: 'APPS_SHOW',
+    CHANGE_ACTIVE_APP: 'CHANGE_ACTIVE_APP'
 };

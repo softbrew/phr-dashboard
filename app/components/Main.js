@@ -16,7 +16,7 @@ import Settings from './dashboard/Settings';
 import Patient from './dashboard/Patient';
 import LanguageSelector from './dashboard/LanguageSelector';
 // import ACTIONS
-import DashboardActions from '../actions/DashboardActions';
+import SessionActions from '../actions/SessionActions';
 // import  STORES
 import DashboardStore from '../stores/DashboardStore';
 import SessionStore from '../stores/SessionStore';
@@ -29,7 +29,7 @@ class Main extends React.Component {
 
     componentDidMount() {
         SessionStore.addChangeListener(this._onChange.bind(this));
-        DashboardActions.getSession();
+        SessionActions.getSession();
     }
 
     componentWillUnmount() {
