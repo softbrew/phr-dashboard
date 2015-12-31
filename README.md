@@ -11,8 +11,7 @@ Patient Dashboard for Personal Health Record System.
 - Install node dependencies `npm install`
 - Install Browser (using `bower`) dependencies `bower install`
 - Build application bundle using `npm run webpack`
-- Serve Client-side resources using a server
-  - Using python 'python -m SimpleHTTPServer 8080', then browse with [`http://localhost:8080/public/`](http://localhost:8080/public/)
+- Then run the server, after successfully running above command
 
 ## Documentation
 
