@@ -16,10 +16,23 @@ class Post extends React.Component {
         return (
             <div className="row">
                 <div className="col-md-8 col-md-offset-2">
-                    <p>{date}</p>
-                    <blockquote>
-                        <p>{this.props.post.text}.</p>
-                    </blockquote>
+                    <hr/>
+                    <div className="row">
+                        <div className="col-md-11">
+                            <blockquote>
+                              <h4>{this.props.post.text}</h4>
+                              <footer>{date}</footer>
+                            </blockquote>
+                        </div>
+                        <div className="col-md-1">
+                            <button type="button" className="btn btn-primary btn-xs" aria-label="Left Align">
+                              <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" className="btn btn-danger btn-xs" aria-label="Left Align">
+                              <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
