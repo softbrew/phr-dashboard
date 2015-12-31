@@ -35,13 +35,17 @@ class JournalStore extends EventEmitter {
     _deletePost(post) {
         for(let i in this.posts) {
             if(post._id === this.posts[i]._id) {
-                this.posts.splice(i,1);
+                this.posts.splice(i, 1);
                 return this.posts;
             }
         }
     }
 
     getPosts() {
+        this.posts.sort(function(a, b) {
+            // subtract to get a value that is either negative, positive, or zero.
+            return b.createdAt - a.createdAt;
+        });
         return this.posts;
     }
 
