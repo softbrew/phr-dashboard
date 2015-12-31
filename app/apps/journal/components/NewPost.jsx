@@ -24,7 +24,7 @@ class NewPost extends React.Component {
             <div className="row">
                 <div className="col-md-8 col-md-offset-2">
                     <div className="input-group">
-                        <textarea type="text" ref={(text) => {this.newPost = text;}} className="form-control" rows="1" placeholder="What's happening now" aria-describedby="sizing-addon1"></textarea>
+                        <textarea ref={(text) => {this.newPost = text;}} className="form-control" rows="1" placeholder="What's happening now"></textarea>
                         <span className="input-group-btn">
                             <button className="btn btn-info" type="button" onClick={this._onNewPost.bind(this)}>New Post</button>
                         </span>

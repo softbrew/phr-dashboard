@@ -18,12 +18,19 @@ class JournalStore extends EventEmitter {
         this.posts = [];
     }
 
-    _setPost(post) {
+    _addPost(post) {
         this.posts.push(post);
     }
-
     _setPosts(posts) {
         this.posts = posts;
+    }
+    _editPost(post) {
+        for(let i in this.posts) {
+            if(post._id === this.posts[i]._id) {
+                this.posts[i] = post;
+                return this.posts;
+            }
+        }
     }
 
     getPosts() {
@@ -46,11 +53,15 @@ const journalStore = new JournalStore();
 Dispatcher.register(action => {
     switch (action.actionType) {
         case JournalConstants.NEW_POST:
-            journalStore._setPost(action.post);
+            journalStore._addPost(action.post);
             journalStore.emitChange();
             break;
         case JournalConstants.UPDATE_POSTS:
             journalStore._setPosts(action.posts);
+            journalStore.emitChange();
+            break;
+        case JournalConstants.EDIT_POST:
+            journalStore._editPost(action.post);
             journalStore.emitChange();
             break;
         default:

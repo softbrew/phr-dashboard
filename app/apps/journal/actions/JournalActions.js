@@ -27,7 +27,10 @@ class JournalActions extends BaseActions {
             headers: this.getHeaders()
         }).then(res => {
             console.log('/apps newPost : ', res);
-
+            Dispacher.dispatch({
+                actionType: JournalConstants.NEW_POST,
+                posts: res.data
+            });
         }).catch(err => {
             console.error(err);
 
@@ -43,6 +46,27 @@ class JournalActions extends BaseActions {
             Dispacher.dispatch({
                 actionType: JournalConstants.UPDATE_POSTS,
                 posts: res.data
+            });
+        }).catch(err => {
+            console.error(err);
+
+        });
+    }
+
+    static editPost(post) {
+        console.log('JournalActions editPost : ', post);
+        axios.put(`/apps/${JournalConstants.APP_ID}/${this.getUser().username}`, {
+                _id: post._id,
+                _rev: post._rev,
+                text: post.text,
+                createdAt: Date.now()
+        }, {
+            headers: this.getHeaders()
+        }).then(res => {
+            console.log('/apps editPost : ', res);
+            Dispacher.dispatch({
+                actionType: JournalConstants.EDIT_POST,
+                post: res.data
             });
         }).catch(err => {
             console.error(err);
