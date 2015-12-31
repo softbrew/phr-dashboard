@@ -18,15 +18,34 @@ class JournalStore extends EventEmitter {
         this.posts = [];
     }
 
-    _setPost(post) {
+    _addPost(post) {
         this.posts.push(post);
     }
-
     _setPosts(posts) {
         this.posts = posts;
     }
+    _editPost(post) {
+        for(let i in this.posts) {
+            if(post._id === this.posts[i]._id) {
+                this.posts[i] = post;
+                return this.posts;
+            }
+        }
+    }
+    _deletePost(post) {
+        for(let i in this.posts) {
+            if(post._id === this.posts[i]._id) {
+                this.posts.splice(i, 1);
+                return this.posts;
+            }
+        }
+    }
 
     getPosts() {
+        this.posts.sort(function(a, b) {
+            // subtract to get a value that is either negative, positive, or zero.
+            return b.createdAt - a.createdAt;
+        });
         return this.posts;
     }
 
@@ -44,13 +63,21 @@ class JournalStore extends EventEmitter {
 const journalStore = new JournalStore();
 
 Dispatcher.register(action => {
-    switch (action.actionType) {
+    switch(action.actionType) {
         case JournalConstants.NEW_POST:
-            journalStore._setPost(action.post);
+            journalStore._addPost(action.post);
             journalStore.emitChange();
             break;
         case JournalConstants.UPDATE_POSTS:
             journalStore._setPosts(action.posts);
+            journalStore.emitChange();
+            break;
+        case JournalConstants.EDIT_POST:
+            journalStore._editPost(action.post);
+            journalStore.emitChange();
+            break;
+        case JournalConstants.DELETE_POST:
+            journalStore._deletePost(action.post);
             journalStore.emitChange();
             break;
         default:

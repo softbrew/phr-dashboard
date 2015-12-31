@@ -24,9 +24,9 @@ class NewPost extends React.Component {
             <div className="row">
                 <div className="col-md-8 col-md-offset-2">
                     <div className="input-group">
-                        <input type="text" ref={(text) => {this.newPost = text;}} className="form-control" placeholder="What's happening now" aria-describedby="sizing-addon1"/>
+                        <textarea ref={(text) => {this.newPost = text;}} className="form-control" rows="1" placeholder="What's happening now"></textarea>
                         <span className="input-group-btn">
-                            <button className="btn btn-default" type="button" onClick={this._onNewPost.bind(this)}>Post</button>
+                            <button className="btn btn-info" type="button" onClick={this._onNewPost.bind(this)}>New Post</button>
                         </span>
                     </div>
                 </div>
@@ -41,6 +41,7 @@ class NewPost extends React.Component {
         this.setState({
             previousPost: this.newPost.value
         });
+        this.newPost.value = '';
     }
 }
 

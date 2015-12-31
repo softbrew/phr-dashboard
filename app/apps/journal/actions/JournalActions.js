@@ -8,6 +8,7 @@
 "use strict";
 
 import axios from 'axios';
+import url from 'url';
 import BaseActions from '../../util/BaseActions';
 
 import Dispacher from '../../util/Dispatcher';
@@ -27,7 +28,10 @@ class JournalActions extends BaseActions {
             headers: this.getHeaders()
         }).then(res => {
             console.log('/apps newPost : ', res);
-
+            Dispacher.dispatch({
+                actionType: JournalConstants.NEW_POST,
+                post: res.data
+            });
         }).catch(err => {
             console.error(err);
 
@@ -43,6 +47,47 @@ class JournalActions extends BaseActions {
             Dispacher.dispatch({
                 actionType: JournalConstants.UPDATE_POSTS,
                 posts: res.data
+            });
+        }).catch(err => {
+            console.error(err);
+
+        });
+    }
+
+    static editPost(post) {
+        console.log('JournalActions editPost : ', post);
+        post.createdAt = Date.now();
+        axios.put(`/apps/${JournalConstants.APP_ID}/${this.getUser().username}`, post, {
+            headers: this.getHeaders()
+        }).then(res => {
+            console.log('/apps editPost : ', res);
+            Dispacher.dispatch({
+                actionType: JournalConstants.EDIT_POST,
+                post: res.data
+            });
+        }).catch(err => {
+            console.error(err);
+
+        });
+    }
+
+    static deletePost(post) {
+        console.log('JournalActions deletePost : ', post);
+        let deleteURL = url.format({
+            pathname: `/apps/${JournalConstants.APP_ID}/${this.getUser().username}`,
+            query: {
+                id: post._id,
+                rev: post._rev
+            }
+        });
+        console.log(deleteURL);
+        axios.delete(deleteURL, {
+            headers: this.getHeaders()
+        }).then(res => {
+            console.log('/apps deletePost : ', res);
+            Dispacher.dispatch({
+                actionType: JournalConstants.DELETE_POST,
+                post: res.data
             });
         }).catch(err => {
             console.error(err);

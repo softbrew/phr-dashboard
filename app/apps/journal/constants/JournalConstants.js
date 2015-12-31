@@ -9,5 +9,8 @@
 
 export default {
     APP_ID: 'journal',
-    UPDATE_POSTS: 'UPDATE_POSTS'
+    NEW_POST: 'NEW_POST',
+    UPDATE_POSTS: 'UPDATE_POSTS',
+    EDIT_POST: 'EDIT_POST',
+    DELETE_POST: 'DELETE_POST'
 };
