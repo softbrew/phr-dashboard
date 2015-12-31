@@ -86,6 +86,7 @@ class Post extends React.Component {
 
     _onDelete(e) {
         console.log('Post _onDelete');
+        JournalActions.deletePost(this.props.post);
     }
 }
 

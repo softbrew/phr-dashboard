@@ -32,6 +32,14 @@ class JournalStore extends EventEmitter {
             }
         }
     }
+    _deletePost(post) {
+        for(let i in this.posts) {
+            if(post._id === this.posts[i]._id) {
+                this.posts.splice(i,1);
+                return this.posts;
+            }
+        }
+    }
 
     getPosts() {
         return this.posts;
@@ -51,7 +59,7 @@ class JournalStore extends EventEmitter {
 const journalStore = new JournalStore();
 
 Dispatcher.register(action => {
-    switch (action.actionType) {
+    switch(action.actionType) {
         case JournalConstants.NEW_POST:
             journalStore._addPost(action.post);
             journalStore.emitChange();
@@ -62,6 +70,10 @@ Dispatcher.register(action => {
             break;
         case JournalConstants.EDIT_POST:
             journalStore._editPost(action.post);
+            journalStore.emitChange();
+            break;
+        case JournalConstants.DELETE_POST:
+            journalStore._deletePost(action.post);
             journalStore.emitChange();
             break;
         default:

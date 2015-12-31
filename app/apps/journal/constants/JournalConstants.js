@@ -11,5 +11,6 @@ export default {
     APP_ID: 'journal',
     NEW_POST: 'NEW_POST',
     UPDATE_POSTS: 'UPDATE_POSTS',
-    EDIT_POST: 'EDIT_POST'
+    EDIT_POST: 'EDIT_POST',
+    DELETE_POST: 'DELETE_POST'
 };

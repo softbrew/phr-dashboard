@@ -41,6 +41,7 @@ class NewPost extends React.Component {
         this.setState({
             previousPost: this.newPost.value
         });
+        this.newPost.value = '';
     }
 }
 

@@ -8,6 +8,7 @@
 "use strict";
 
 import axios from 'axios';
+import url from 'url';
 import BaseActions from '../../util/BaseActions';
 
 import Dispacher from '../../util/Dispatcher';
@@ -29,7 +30,7 @@ class JournalActions extends BaseActions {
             console.log('/apps newPost : ', res);
             Dispacher.dispatch({
                 actionType: JournalConstants.NEW_POST,
-                posts: res.data
+                post: res.data
             });
         }).catch(err => {
             console.error(err);
@@ -55,17 +56,37 @@ class JournalActions extends BaseActions {
 
     static editPost(post) {
         console.log('JournalActions editPost : ', post);
-        axios.put(`/apps/${JournalConstants.APP_ID}/${this.getUser().username}`, {
-                _id: post._id,
-                _rev: post._rev,
-                text: post.text,
-                createdAt: Date.now()
-        }, {
+        post.createdAt = Date.now();
+        axios.put(`/apps/${JournalConstants.APP_ID}/${this.getUser().username}`, post, {
             headers: this.getHeaders()
         }).then(res => {
             console.log('/apps editPost : ', res);
             Dispacher.dispatch({
                 actionType: JournalConstants.EDIT_POST,
+                post: res.data
+            });
+        }).catch(err => {
+            console.error(err);
+
+        });
+    }
+
+    static deletePost(post) {
+        console.log('JournalActions deletePost : ', post);
+        let deleteURL = url.format({
+            pathname: `/apps/${JournalConstants.APP_ID}/${this.getUser().username}`,
+            query: {
+                id: post._id,
+                rev: post._rev
+            }
+        });
+        console.log(deleteURL);
+        axios.delete(deleteURL, {
+            headers: this.getHeaders()
+        }).then(res => {
+            console.log('/apps deletePost : ', res);
+            Dispacher.dispatch({
+                actionType: JournalConstants.DELETE_POST,
                 post: res.data
             });
         }).catch(err => {
