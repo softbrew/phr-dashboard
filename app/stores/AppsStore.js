@@ -45,7 +45,7 @@ class AppsStore extends EventEmitter {
 
     removeChangeListener(callback) {
         // TODO: Error in Event Emitter
-        this.removeAllListeners(this.CHANGE_EVENT, callback);
+        this.removeAllListeners(this.CHANGE_EVENT);
     }
 }
 
