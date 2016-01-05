@@ -21,21 +21,52 @@ class Appointment extends React.Component {
     }
 
     render () {
-        var date = new Date(this.props.post.createdAt);
-        date = date.toLocaleString();
+        let key = `collapse${this.props.key}`;
+        // `start` date
+        let startDate = new Date(this.props.appointment.start);
+        startDate = startDate.toLocaleString();
+        // `end` date
+        let endDate = 'Not given';
+        if(this.props.appointment.end) {
+            endDate = new Date(this.props.appointment.end);
+            endDate = endDate.toLocaleString();
+        } else if(this.props.appointment.minutesDuration) {
+            endDate = this.props.appointment.minutesDuration.toString();
+        }
+        let participants = this.props.appointment.participant.
+        map((participant, index) => {
+            if(participant.hasOwnProperty('actor')) {
+                let actorName = "Unknown";
+                if(participant.actor.hasOwnProperty('display')) {
+                    actorName = participant.actor.display;
+                } else {
+                    actorName = participant.actor.reference;
+                }
+                return <li key={index}> {actorName + ' '} (<mark>{participant.status}</mark>) </li>;
+            }
+        });
+
         return (
             <div className="row">
                 <div className="col-md-8 col-md-offset-2">
                     <hr/>
                     <div className="row">
-                        <div className="col-md-11">
-                            <blockquote>
-                                {!this.state.isEditing && <h4>{this.props.post.text}</h4>}
-                                {this.state.isEditing && <textarea ref={(text) => {this.editAppointment = text;}} className="form-control" rows="1" placeholder="What's happening now" value={this.state.text} onChange={this._onEditing.bind(this)}></textarea>}
-                                <footer>{date}</footer>
-                            </blockquote>
+                        <div className="col-md-10">
+                            <div className="col-md-1">
+                                <h4>{this.props.appointment.priority || 5}</h4>
+                            </div>
+                            <div className="col-md-2">
+                                <h5>{startDate}</h5>
+                            </div>
+                            <div className="col-md-2">
+                                <h5>{endDate}</h5>
+                            </div>
+                            <div className="col-md-7">
+                                <ul className="list-unstyled">{participants}
+                                </ul>
+                            </div>
                         </div>
-                        <div className="col-md-1">
+                        <div className="col-md-2">
                             {!this.state.isEditing && <button type="button" className="btn btn-primary btn-xs" aria-label="Left Align" onClick={this._onEdit.bind(this)}>
                               <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </button>}
@@ -45,6 +76,16 @@ class Appointment extends React.Component {
                             <button type="button" className="btn btn-danger btn-xs" aria-label="Left Align" onClick={this._onDelete.bind(this)}>
                               <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </button>
+                            <button className="btn btn-warning btn-xs" type="button" data-toggle="collapse" data-target={'#' + key} aria-expanded="false" aria-controls={key}>
+                                <span className="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="collapse" id={key}>
+                          <div className="well">
+                            ...
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -60,7 +101,7 @@ class Appointment extends React.Component {
         console.log('Appointment _onEdit');
         this.setState({
             isEditing: true,
-            text: this.props.post.text
+            text: this.props.appointment.text
         });
     }
 
@@ -74,9 +115,9 @@ class Appointment extends React.Component {
 
     _onSave(e) {
         console.log('Appointment _onSave');
-        let post = this.props.post;
-        post.text = this.editAppointment.value;
-        AppointmentsActions.editAppointment(post);
+        let appointment = this.props.appointment;
+        appointment.text = this.editAppointment.value;
+        AppointmentsActions.editAppointment(appointment);
         // Change state
         this.setState({
             isEditing: false,
@@ -86,12 +127,13 @@ class Appointment extends React.Component {
 
     _onDelete(e) {
         console.log('Appointment _onDelete');
-        AppointmentsActions.deleteAppointment(this.props.post);
+        AppointmentsActions.deleteAppointment(this.props.appointment);
     }
 }
 
 Appointment.PropTypes = {
-    post: PropTypes.object.isRequired
+    appointment: PropTypes.object.isRequired,
+    key: PropTypes.number.isRequired
 };
 
 export default Appointment;

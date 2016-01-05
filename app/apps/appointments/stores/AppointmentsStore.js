@@ -22,7 +22,6 @@ class AppointmentsStore extends EventEmitter {
         this.appointments.push(appointment);
     }
     _setAppointments(appointments) {
-        console.log('0000 ', appointments);
         this.appointments = appointments;
     }
     _editAppointment(appointment) {
@@ -43,7 +42,6 @@ class AppointmentsStore extends EventEmitter {
     }
 
     getAppointments() {
-        console.log('fdfdfd', this.appointments);
         this.appointments.sort(function(a, b) {
             // subtract to get a value that is either negative, positive, or zero.
             return b.createdAt - a.createdAt;

@@ -17,12 +17,29 @@ class AppointmentList extends React.Component {
     }
 
     render() {
-        var appointments = this.props.appointmentList.map((post, index) => {
-            return <Appointment post={post} key={index}></Appointment>;
+        var appointments = this.props.appointmentList.map((appointment, index) => {
+            return <Appointment appointment={appointment} key={index}></Appointment>;
         });
 
         return(
             <div>
+                <div className="row">
+                    <div className="col-md-8 col-md-offset-2">
+                        <br/>
+                        <div className="row">
+                            <div className="col-md-10">
+                                <div className="col-md-1">
+                                    <strong>Priority</strong></div>
+                                <div className="col-md-2">
+                                    <strong>Start</strong></div>
+                                <div className="col-md-2">
+                                    <strong>End</strong></div>
+                                <div className="col-md-7">
+                                    <strong>Participants</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {appointments}
             </div>
         );
