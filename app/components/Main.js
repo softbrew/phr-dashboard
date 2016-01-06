@@ -42,11 +42,11 @@ class Main extends React.Component {
                 <Settings></Settings>
                 <Patient></Patient>
                 {this.props.children}
-                <footer id="info" className="navbar-fixed-bottom">
+                <div id="info" className="row">
                     <LanguageSelector></LanguageSelector>
                     <p className="text-center text-muted small">Personal Health Record System
                         Copyrights at <em><a href="http://www.softbrew.tech/">Softbrew Inc.</a></em></p>
-                </footer>
+                </div>
             </div>
         );
     }

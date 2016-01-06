@@ -11,7 +11,6 @@ import React, { PropTypes } from 'react';
 // import Stores
 import AppointmentsStore from '../stores/AppointmentsStore';
 // import Components
-import NewAppointment from './NewAppointment.jsx';
 import AppointmentList from './AppointmentList.jsx';
 // import Actions
 import AppointmentsActions from '../actions/AppointmentsActions';

@@ -12,7 +12,7 @@ import AppNavigator from '../components/market/AppNavigator';
 // import APPS
 import Appointments from '../apps/appointments/index.jsx';
 import AppointmentsView from '../apps/appointments/components/Appointments.jsx';
-import NewAppointment from '../apps/appointments/components/NewAppointment.jsx';
+import NewAppointment from '../apps/appointments/components/new/NewAppointment.jsx';
 import MedicalRecord from '../apps/medical_record/index';
 import Journal from '../apps/journal/index';
 
