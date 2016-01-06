@@ -9,12 +9,11 @@
 
 import React, { PropTypes } from 'react';
 // import Stores
-import AppointmentsStore from './stores/AppointmentsStore';
+import AppointmentsStore from '../stores/AppointmentsStore';
 // import Components
-import NewAppointment from './components/NewAppointment.jsx';
-import AppointmentList from './components/AppointmentList.jsx';
+import AppointmentList from './AppointmentList.jsx';
 // import Actions
-import AppointmentsActions from './actions/AppointmentsActions';
+import AppointmentsActions from '../actions/AppointmentsActions';
 
 class Appointments extends React.Component {
     constructor() {
@@ -35,7 +34,10 @@ class Appointments extends React.Component {
     render () {
         return (
             <div>
-                <NewAppointment></NewAppointment>
+                {this.props.children}
+                <a className="btn btn-info pull-right glyphicon glyphicon-bullhorn" href="#/apps/appointments/new" role="button">
+                    <span> </span>NewAppointment
+                </a>
                 <AppointmentList appointmentList={this.state.appointments}></AppointmentList>
             </div>
         );

@@ -38,7 +38,7 @@ class AppNavigator extends React.Component {
                     </ol>
                 </div>
                 {this.props.children}
-        </div>
+            </div>
         );
     }
 

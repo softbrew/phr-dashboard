@@ -10,7 +10,9 @@ import CardList from '../components/market/CardList';
 import AppNavigator from '../components/market/AppNavigator';
 
 // import APPS
-import Appointments from '../apps/appointments/index';
+import Appointments from '../apps/appointments/index.jsx';
+import AppointmentsView from '../apps/appointments/components/Appointments.jsx';
+import NewAppointment from '../apps/appointments/components/new/NewAppointment.jsx';
 import MedicalRecord from '../apps/medical_record/index';
 import Journal from '../apps/journal/index';
 
@@ -18,7 +20,10 @@ export default (
     <Route path='/' component={Main}>
         <IndexRoute component={CardList}></IndexRoute>
         <Route path='apps' component={AppNavigator}>
-            <Route path='appointments' component={Appointments}></Route>
+            <Route path='appointments' component={Appointments}>
+                <IndexRoute component={AppointmentsView}></IndexRoute>
+                <Route path='new' component={NewAppointment}></Route>
+            </Route>
             <Route path='medical_record' component={MedicalRecord}></Route>
             <Route path='journal' component={Journal}></Route>
         </Route>
