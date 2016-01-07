@@ -18,7 +18,7 @@ class AppointmentList extends React.Component {
 
     render() {
         var appointments = this.props.appointmentList.map((appointment, index) => {
-            return <Appointment appointment={appointment} key={index}></Appointment>;
+            return <Appointment appointment={appointment} key={index} index={index}></Appointment>;
         });
 
         return(

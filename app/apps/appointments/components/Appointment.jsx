@@ -10,6 +10,8 @@
 import React, { PropTypes } from 'react';
 // import Actions
 import AppointmentsActions from '../actions/AppointmentsActions';
+// import Components
+import EditAppointment from './new/EditAppointment.jsx';
 
 class Appointment extends React.Component {
     constructor() {
@@ -21,7 +23,9 @@ class Appointment extends React.Component {
     }
 
     render () {
-        let key = `collapse${this.props.key}`;
+        let key = `collapse${this.props.index}`;
+        let modalKey = `editAppointmentModal${this.props.index}`;
+
         // `start` date
         let startDate = new Date(this.props.appointment.start);
         startDate = startDate.toLocaleString();
@@ -67,12 +71,9 @@ class Appointment extends React.Component {
                             </div>
                         </div>
                         <div className="col-md-2">
-                            {!this.state.isEditing && <button type="button" className="btn btn-primary btn-xs" aria-label="Left Align" onClick={this._onEdit.bind(this)}>
+                            <button type="button" className="btn btn-primary btn-xs" data-toggle="modal" data-target={'#' + modalKey}>
                               <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </button>}
-                            {this.state.isEditing && <button type="button" className="btn btn-success btn-xs" aria-label="Left Align" onClick={this._onSave.bind(this)}>
-                              <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                            </button>}
+                            </button>
                             <button type="button" className="btn btn-danger btn-xs" aria-label="Left Align" onClick={this._onDelete.bind(this)}>
                               <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </button>
@@ -88,6 +89,8 @@ class Appointment extends React.Component {
                           </div>
                         </div>
                     </div>
+
+                    <EditAppointment key={modalKey} index={modalKey}></EditAppointment>
                 </div>
             </div>
         );
@@ -133,7 +136,7 @@ class Appointment extends React.Component {
 
 Appointment.PropTypes = {
     appointment: PropTypes.object.isRequired,
-    key: PropTypes.number.isRequired
+    index: PropTypes.number.isRequired
 };
 
 export default Appointment;

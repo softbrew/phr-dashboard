@@ -2,7 +2,7 @@
  * Copyright (c) 2015, Softbrew, Inc.
  * All rights reserved.
  *
- * Journal NewAppointment React Component
+ * NewAppointment React Component
  */
 
 "use strict";
@@ -28,7 +28,6 @@ class NewAppointment extends React.Component {
             participantList: []
         };
     }
-
     componentDidMount() {
         AppointmentsStore.addChangeListener(this._onChange.bind(this));
     }
@@ -193,7 +192,6 @@ class NewAppointment extends React.Component {
 }
 
 NewAppointment.PropTypes = {
-    appointment: PropTypes.object.isRequired
 };
 
 export default NewAppointment;
