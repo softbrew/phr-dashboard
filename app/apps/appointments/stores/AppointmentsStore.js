@@ -56,7 +56,7 @@ class AppointmentsStore extends EventEmitter {
         this.on(this.CHANGE_EVENT, callback);
     }
     removeChangeListener(callback) {
-        //this.removeListener(this.CHANGE_EVENT, callback);
+        // this.removeListener(this.CHANGE_EVENT, callback);
         // HACK to fixed above line is not working
         this.removeAllListeners(this.CHANGE_EVENT);
     }

@@ -2,7 +2,7 @@
  * Copyright (c) 2015, Softbrew, Inc.
  * All rights reserved.
  *
- * Journal NewAppointment React Component
+ * NewAppointment React Component
  */
 
 "use strict";
@@ -25,10 +25,11 @@ class NewAppointment extends React.Component {
     constructor() {
         super();
         this.state = {
+            start: (new Date()).toISOString().substr(0,19),
+            end: (new Date(Date.now() + 60*60*1000)).toISOString().substr(0,19),
             participantList: []
         };
     }
-
     componentDidMount() {
         AppointmentsStore.addChangeListener(this._onChange.bind(this));
     }
@@ -74,7 +75,7 @@ class NewAppointment extends React.Component {
                         <div className="form-group">
                             <label htmlFor="inputPriority" className="col-md-2 control-label">Priority</label>
                             <div className="col-md-10">
-                                <input type="number" id="inputPriority" className="form-control" min="0" max="9" ref={(number) => {this.appointmentPriority = number;}}/>
+                                <input type="number" id="inputPriority" className="form-control" min="0" max="9" ref={(number) => {this.appointmentPriority = number;}} defaultValue="0"/>
                             </div>
                         </div>
 
@@ -86,22 +87,16 @@ class NewAppointment extends React.Component {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="inputStartDate" className="col-md-2 control-label">Start</label>
-                            <div className="col-md-5">
-                                <input type="date" id="inputStartDate" className="form-control" ref={(date) => {this.appointmentStartDate = date;}}/>
-                            </div>
-                            <div className="col-md-5">
-                                <input type="time" id="inputStartTime" className="form-control" ref={(time) => {this.appointmentStartTime = time;}}/>
+                            <label htmlFor="inputStart" className="col-md-2 control-label">Start</label>
+                            <div className="col-md-10">
+                                <input type="datetime-local" id="inputStart" className="form-control" ref={(date) => {this.appointmentStart = date;}} value={this.state.start.substr(0,19)} data-field="start" onChange={this._onDateChange.bind(this)}/>
                             </div>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="inputEndDate" className="col-md-2 control-label">End</label>
-                            <div className="col-md-5">
-                                <input type="date" id="inputEndDate" className="form-control" ref={(date) => {this.appointmentEndDate = date;}}/>
-                            </div>
-                            <div className="col-md-5">
-                                <input type="time" id="inputEndTime" className="form-control" ref={(time) => {this.appointmentEndTime = time;}}/>
+                            <label htmlFor="inputEnd" className="col-md-2 control-label">End</label>
+                            <div className="col-md-10">
+                                <input type="datetime-local" id="inputEnd" className="form-control" ref={(date) => {this.appointmentEnd = date;}} value={this.state.end.substr(0,19)} data-field="end" onChange={this._onDateChange.bind(this)}/>
                             </div>
                         </div>
 
@@ -109,7 +104,7 @@ class NewAppointment extends React.Component {
                             <label htmlFor="inputMinutesDuration" className="col-md-2 control-label">Duration</label>
                             <div className="col-md-10">
                                 <div className="input-group">
-                                    <input type="number" min="0" max="1440" className="form-control" id="inputMinutesDuration" ref={(minutes) => {this.appointmentMinutesDuration = minutes;}}/>
+                                    <input type="number" min="0" max="1440" className="form-control" id="inputMinutesDuration" ref={(minutes) => {this.appointmentMinutesDuration = minutes;}} defaultValue="1"/>
                                     <span className="input-group-addon">minutes</span>
                                 </div>
                             </div>
@@ -148,8 +143,9 @@ class NewAppointment extends React.Component {
             alert("Should select Appointment 'Status'.");
         }
         // `participant` is Required
-        if(this.state.participantList.length < 0) {
+        if(this.state.participantList.length < 1) {
             alert("Should have atleast one 'Participant'.");
+            return;
         }
         let selectedCode = PracticeCodes.find((code) => {
           return code.code === this.appointmentType.value;
@@ -171,8 +167,8 @@ class NewAppointment extends React.Component {
             },
             "priority": this.appointmentPriority.value,
             "description": this.appointmentDescription.value,
-            "start": this.appointmentStartDate.value + 'T' + this.appointmentStartTime.value + ':00.000Z',
-            "end": this.appointmentEndDate.value + 'T' + this.appointmentEndTime.value + ':00.000Z',
+            "start": this.state.start + '.000Z',
+            "end": this.state.end + '.000Z',
             "minutesDuration": this.appointmentMinutesDuration.value,
             "comment": this.appointmentComment.value,
             "participant": this.state.participantList
@@ -180,7 +176,14 @@ class NewAppointment extends React.Component {
         AppointmentsActions.newAppointment(appointment);
     }
 
+    _onDateChange(e) {
+        let state = this.state;
+        state[e.target.dataset.field] = e.target.value;
+        this.setState(state);
+    }
+
     _onChange() {
+        console.log('NewAppointment _onChange');
         this.props.history.replaceState(null, '/apps/appointments');
     }
 
@@ -193,7 +196,6 @@ class NewAppointment extends React.Component {
 }
 
 NewAppointment.PropTypes = {
-    appointment: PropTypes.object.isRequired
 };
 
 export default NewAppointment;

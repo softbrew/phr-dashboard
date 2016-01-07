@@ -10,28 +10,29 @@
 import React, { PropTypes } from 'react';
 // import Actions
 import AppointmentsActions from '../actions/AppointmentsActions';
+// import Components
+import EditAppointment from './new/EditAppointment.jsx';
 
 class Appointment extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            isEditing: false,
-            text: ''
-        };
+    constructor(props) {
+        super(props);
+        this.state = props.appointment;
     }
 
     render () {
-        let key = `collapse${this.props.key}`;
+        let key = `collapse${this.props.index}`;
+        let modalKey = `editAppointmentModal${this.props.index}`;
+
         // `start` date
-        let startDate = new Date(this.props.appointment.start);
+        let startDate = new Date(this.state.start);
         startDate = startDate.toLocaleString();
         // `end` date
         let endDate = 'Not given';
-        if(this.props.appointment.end) {
-            endDate = new Date(this.props.appointment.end);
+        if(this.props.appointment.hasOwnProperty('end')) {
+            endDate = new Date(this.state.end);
             endDate = endDate.toLocaleString();
-        } else if(this.props.appointment.minutesDuration) {
-            endDate = this.props.appointment.minutesDuration.toString();
+        } else if(this.state.minutesDuration) {
+            endDate = this.state.minutesDuration.toString();
         }
         let participants = this.props.appointment.participant.
         map((participant, index) => {
@@ -67,12 +68,9 @@ class Appointment extends React.Component {
                             </div>
                         </div>
                         <div className="col-md-2">
-                            {!this.state.isEditing && <button type="button" className="btn btn-primary btn-xs" aria-label="Left Align" onClick={this._onEdit.bind(this)}>
+                            <button type="button" className="btn btn-primary btn-xs" data-toggle="modal" data-target={'#' + modalKey}>
                               <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </button>}
-                            {this.state.isEditing && <button type="button" className="btn btn-success btn-xs" aria-label="Left Align" onClick={this._onSave.bind(this)}>
-                              <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                            </button>}
+                            </button>
                             <button type="button" className="btn btn-danger btn-xs" aria-label="Left Align" onClick={this._onDelete.bind(this)}>
                               <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </button>
@@ -88,52 +86,22 @@ class Appointment extends React.Component {
                           </div>
                         </div>
                     </div>
+
+                    <EditAppointment key={modalKey} index={modalKey} appointment={this.state}></EditAppointment>
                 </div>
             </div>
         );
     }
 
-    _onChange() {
-        console.log('Appointment _onChange');
-    }
-
-    _onEdit(e) {
-        console.log('Appointment _onEdit');
-        this.setState({
-            isEditing: true,
-            text: this.props.appointment.text
-        });
-    }
-
-    _onEditing(e) {
-        console.log('Appointment _onEditing');
-        this.setState({
-            isEditing: true,
-            text: this.editAppointment.value
-        });
-    }
-
-    _onSave(e) {
-        console.log('Appointment _onSave');
-        let appointment = this.props.appointment;
-        appointment.text = this.editAppointment.value;
-        AppointmentsActions.editAppointment(appointment);
-        // Change state
-        this.setState({
-            isEditing: false,
-            text: this.editAppointment.value
-        });
-    }
-
     _onDelete(e) {
-        console.log('Appointment _onDelete');
+        console.log('Appointment _onDelete ', this.props.appointment);
         AppointmentsActions.deleteAppointment(this.props.appointment);
     }
 }
 
 Appointment.PropTypes = {
     appointment: PropTypes.object.isRequired,
-    key: PropTypes.number.isRequired
+    index: PropTypes.number.isRequired
 };
 
 export default Appointment;

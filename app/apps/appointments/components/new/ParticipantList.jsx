@@ -18,7 +18,7 @@ class ParticipantList extends React.Component {
     render() {
         let list = this.props.participantList.map((participant, index) => {
             let type = "Not Given";
-            if(participant.type.length) {
+            if(participant.hasOwnProperty('type') && participant.type.length) {
                 type = participant.type[0].coding[0].code;
             }
             return <dl key={'addedParticipantList' + index} className="dl-horizontal">

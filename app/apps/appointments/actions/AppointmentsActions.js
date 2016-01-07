@@ -36,7 +36,7 @@ class AppointmentsActions extends BaseActions {
     }
 
     static getAppointments() {
-        console.log('JournalActions getAppointments');
+        console.log('AppointmentsActions getAppointments');
         axios.get(`/apps/${AppointmentsConstants.APP_ID}/${this.getUser().username}`, {
             headers: this.getHeaders()
         }).then(res => {
@@ -52,8 +52,7 @@ class AppointmentsActions extends BaseActions {
     }
 
     static editAppointment(appointment) {
-        console.log('JournalActions editAppointment : ', appointment);
-        appointment.createdAt = Date.now();
+        console.log('AppointmentsActions editAppointment : ', appointment);
         axios.put(`/apps/${AppointmentsConstants.APP_ID}/${this.getUser().username}`, appointment, {
             headers: this.getHeaders()
         }).then(res => {
@@ -69,7 +68,7 @@ class AppointmentsActions extends BaseActions {
     }
 
     static deleteAppointment(appointment) {
-        console.log('JournalActions deleteAppointment : ', appointment);
+        console.log('AppointmentsActions deleteAppointment : ', appointment);
         let deleteURL = url.format({
             pathname: `/apps/${AppointmentsConstants.APP_ID}/${this.getUser().username}`,
             query: {
