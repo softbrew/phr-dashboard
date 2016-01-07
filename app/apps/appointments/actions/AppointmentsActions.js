@@ -19,12 +19,9 @@ class AppointmentsActions extends BaseActions {
         super();
     }
 
-    static newAppointment(text) {
-        console.log('JournalActions newAppointment : ', text);
-        axios.post(`/apps/${AppointmentsConstants.APP_ID}/${this.getUser().username}`, {
-                text: text,
-                createdAt: Date.now()
-        }, {
+    static newAppointment(appointment) {
+        console.log('AppointmentsActions newAppointment : ', appointment);
+        axios.post(`/apps/${AppointmentsConstants.APP_ID}/${this.getUser().username}`, appointment, {
             headers: this.getHeaders()
         }).then(res => {
             console.log('/apps newAppointment : ', res);

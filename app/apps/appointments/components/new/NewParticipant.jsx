@@ -101,13 +101,11 @@ class NewParticipant extends React.Component {
                 "type": [{
                     "coding": [{
                         "system": "http://hl7.org/fhir/participant-type",
-                        "code": this.participantType
-                            .value
+                        "code": this.participantType.value
                     }]
                 }],
                 "actor": {
-                    "reference": this.participantActor.value + this
-                        .participantActorId.value
+                    "reference": `${this.participantActor.value}/${this.participantActorId.value}`
                 },
                 "required": this.participantRequired.value,
                 "status": this.participantStatus.value
