@@ -39,6 +39,10 @@ class SessionActions {
                     actionType: SessionConstants.NEW_SESSION,
                     user: res.data.user
                 });
+                PHRDispacher.dispatch({
+                    actionType: DashboardConstants.DASHBOARD_GET_PATIENT,
+                    patient: res.data.user
+                });
             }).catch(err => {
                 console.error(err);
                 PHRDispacher.dispatch({

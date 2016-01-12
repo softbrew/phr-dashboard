@@ -1,8 +1,8 @@
 /**
-* Copyright (c) 2015, Softbrew, Inc.
-* All rights reserved.
-*
-* DashboardStore
+ * Copyright (c) 2015, Softbrew, Inc.
+ * All rights reserved.
+ *
+ * DashboardStore
  */
 
 "use strict";
@@ -15,9 +15,22 @@ class DashboardStore extends EventEmitter {
     constructor() {
         super();
         this.CHANGE_EVENT = 'change';
-        this.dashboard = {
+        this.store = {
+            id: 0,
+            rev: 0,
+            username: "username",
+            email: "email",
+            name: "name",
+            address: "address",
+            birthDate: "birthDate",
+            gender: "gender",
+            telecom: "telecom",
             fhirServerList: []
         };
+    }
+
+    _setPatient(patient) {
+        this.store = patient;
     }
 
     getAll() {
@@ -37,14 +50,17 @@ class DashboardStore extends EventEmitter {
     }
 }
 
+let dashboardStore = new DashboardStore();
+
 // Register callback to handle dashboard updates
 PHRDispacher.register(action => {
-    switch (action.actionType) {
-        case DashboardConstants.DASHBOARD_CREATE:
-            DashboardStore.emitChange();
+    switch(action.actionType) {
+        case DashboardConstants.DASHBOARD_GET_PATIENT:
+            dashboardStore._setPatient(action.patient);
+            dashboardStore.emitChange();
             break;
     }
     return true;
 });
 
-export default DashboardStore;
+export default dashboardStore;
