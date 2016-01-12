@@ -10,5 +10,5 @@
 "use strict";
 
 export default {
-    DASHBOARD_CREATE: 'DASHBOARD_CREATE'
+    DASHBOARD_GET_PATIENT: 'DASHBOARD_GET_PATIENT'
 };

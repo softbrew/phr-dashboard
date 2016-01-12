@@ -49,7 +49,13 @@ class SignUpActions {
                     state:data.address[0].state,
                     postalCode:data.address[0].postalCode
                 },
-                telecom: data.telecom[1].value
+                telecom: data.telecom[1].value,
+                fhirServerList: [{
+                    url: baseURL,
+                    patientId: patientId
+                }],
+                createdAt: Date.now(),
+                modifiedAt: Date.now()
             };
             console.log('Patient: ', patient);
             LoginDispatcher.dispatch({
