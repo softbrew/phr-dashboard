@@ -9,13 +9,29 @@
 
 import React, { PropTypes } from 'react';
 
+import DashboardStore from '../../stores/DashboardStore';
+import DashboardActions from '../../actions/DashboardActions';
+
 class Settings extends React.Component {
     constructor(props) {
         super(props);
+        this.state = DashboardStore.getAll();
+    }
 
+    componentDidMount() {
+        DashboardStore.addChangeListener(this._onChange.bind(this));
+    }
+    componentWillUnmount() {
+        DashboardStore.removeChangeListener(this._onChange.bind(this));
     }
 
     render () {
+        let serverList = this.state.fhirServerList.map((server, index) => {
+            return (
+                <li key={index}>{server.url} {server.patientId}</li>
+            );
+        });
+
         return (
             <div className="row">
                 <div className="col-md-4 col-md-offset-1">
@@ -43,6 +59,11 @@ class Settings extends React.Component {
                     <div className="row">
                         <h4>Manage FHIR Accounts</h4>
                         <hr/>
+                        <div className="row">
+                            <ul>
+                                {serverList}
+                            </ul>
+                        </div>
                         <form>
                           <div className="form-group">
                             <label className="" htmlFor="inputFHIRAccount">New FHIR Server URL</label>
@@ -66,6 +87,11 @@ class Settings extends React.Component {
 
     _onAddFHIRServer(e) {
         e.preventDefault();
+    }
+
+    _onChange() {
+        console.log('Settings _onChange : ', DashboardStore.getAll());
+        this.setState(DashboardStore.getAll());
     }
 }
 
