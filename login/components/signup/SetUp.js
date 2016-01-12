@@ -32,7 +32,7 @@ class SetUp extends React.Component {
                             and create a new account in this system. After providing details click next.</h6>
                             <div className="form-group">
                                 <label htmlFor="inputFHIRServer" className="">FHIR Server Base URL</label>
-                                <input type="text" id="inputFHIRServer" ref={(url) => {this.fhirServer = url;}} className="form-control" placeholder="http://fhirtest.uhn.ca/baseDstu2" required autofocus></input>
+                                <input type="url" id="inputFHIRServer" ref={(url) => {this.fhirServer = url;}} className="form-control" placeholder="http://fhirtest.uhn.ca/baseDstu2" required autofocus></input>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="inputPatientId" className="">Patient ID</label>

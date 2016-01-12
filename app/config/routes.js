@@ -8,6 +8,7 @@ import { Router, Route, Link, IndexRoute } from 'react-router';
 import Main from '../components/Main';
 import CardList from '../components/market/CardList';
 import AppNavigator from '../components/market/AppNavigator';
+import Settings from '../components/dashboard/Settings';
 
 // import APPS
 import Appointments from '../apps/appointments/index.jsx';
@@ -29,5 +30,6 @@ export default (
             <Route path='medical_record' component={MedicalRecord}></Route>
             <Route path='journal' component={Journal}></Route>
         </Route>
+        <Route path='settings' component={Settings}></Route>
     </Route>
 );

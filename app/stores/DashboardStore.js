@@ -15,7 +15,9 @@ class DashboardStore extends EventEmitter {
     constructor() {
         super();
         this.CHANGE_EVENT = 'change';
-        this.dashboard = {};
+        this.dashboard = {
+            fhirServerList: []
+        };
     }
 
     getAll() {

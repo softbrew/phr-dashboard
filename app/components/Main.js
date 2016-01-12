@@ -12,7 +12,7 @@ import React, {
 }
 from 'react';
 // import COMPONENTS
-import Settings from './dashboard/Settings';
+import Navigation from './dashboard/Navigation';
 import Patient from './dashboard/Patient';
 import LanguageSelector from './dashboard/LanguageSelector';
 // import ACTIONS
@@ -39,7 +39,7 @@ class Main extends React.Component {
     render() {
         return(
             <div className="container-fluid">
-                <Settings></Settings>
+                <Navigation></Navigation>
                 <Patient></Patient>
                 {this.props.children}
                 <div id="info" className="row">
