@@ -21,8 +21,6 @@ class SignUpActions {
      * @return {null}     Nothing
      */
     static importPatient(baseURL, patientId) {
-        baseURL = "http://fhirtest.uhn.ca/baseDstu2";
-        patientId = 843791;
         console.log('ImportPatient: ', baseURL, patientId);
         var instance = axios.create({
             baseURL: 'http://localhost:8000',

@@ -83,6 +83,15 @@ class Settings extends React.Component {
 
     _onChangePassword(e) {
         e.preventDefault();
+        if(this.newPassword.toString() !== this.confirmPassword.toString()) {
+            alert('Confirmed Password should be same as new Password.');
+            this.confirmPassword.value = '';
+        } else {
+            DashboardActions.changePassword({
+                password: this.currentPassword.value,
+                newPassword: this.newPassword.value
+            });
+        }
     }
 
     _onAddFHIRServer(e) {
