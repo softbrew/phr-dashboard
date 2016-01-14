@@ -28,13 +28,27 @@ class Settings extends React.Component {
     render () {
         let serverList = this.state.fhirServerList.map((server, index) => {
             return (
-                <li key={index}>{server.url} {server.patientId}</li>
+                <div className="row" key={index}>
+                    <form className="form-inline">
+                        <div className="form-group">
+                            <label htmlFor={'fhirURL' + index}> Server :</label>
+                            <input type="text" className="form-control" id={'fhirURL' + index} placeholder={server.url} readOnly value={server.url}/>
+                        </div><span>  </span>
+                    <div className="form-group">
+                            <label htmlFor={'patientId' + index}> PatientId :</label>
+                            <input type="text" className="form-control" id={'patientId' + index} placeholder={server.patientId} readOnly value={server.patientId}/>
+                        </div><span> </span>
+                    <button type="submit" className="btn btn-danger btn-sm" onClick={this._onRemoveFHIRServer.bind(this)} value={`${server.url}$${server.patientId}`}>
+                            Remove
+                        </button>
+                    </form>
+                </div>
             );
         });
 
         return (
             <div className="row">
-                <div className="col-md-4 col-md-offset-1">
+                <div className="col-md-6 col-md-offset-1">
                     <h2 className="text-center">Settings</h2><br/>
                     <div className="row">
                         <h4>Change Password</h4>
@@ -67,7 +81,7 @@ class Settings extends React.Component {
                         <form>
                           <div className="form-group">
                             <label className="" htmlFor="inputFHIRAccount">New FHIR Server URL</label>
-                            <input type="url" className="form-control" id="inputFHIRAccount" placeholder="http://fhirtest.uhn.ca/baseDstu2" ref={c => {this.newFHIRAccount = c;}}/>
+                            <input type="url" className="form-control" id="inputFHIRAccount" placeholder="http://fhirtest.uhn.ca/baseDstu2" ref={c => {this.newFHIRServer = c;}}/>
                           </div>
                           <div className="form-group">
                             <label className="" htmlFor="inputPatientId">Patient ID</label>
@@ -96,11 +110,54 @@ class Settings extends React.Component {
 
     _onAddFHIRServer(e) {
         e.preventDefault();
+        if(!(this.newFHIRServer && this.newPatientId)) {
+            alert('FHIR Server Name and Patient ID should required.')
+        } else {
+            let fhirServerList = this.state.fhirServerList;
+            let isExists = fhirServerList.filter(server => {
+                return server.url === this.newFHIRServer.value;
+            }, this);
+
+            if(isExists.length) {
+                alert('FHIR server is already existing.');
+            } else {
+                fhirServerList.push({
+                    url: this.newFHIRServer.value,
+                    patientId: this.newPatientId.value
+                });
+                DashboardActions.changeFHIRServerList(fhirServerList);
+                this.newFHIRServer.value = '';
+                this.newPatientId.value = '';
+            }
+        }
     }
 
     _onChange() {
         console.log('Settings _onChange : ', DashboardStore.getAll());
         this.setState(DashboardStore.getAll());
+    }
+
+    _onRemoveFHIRServer(e) {
+        console.log('Settings _onRemoveFHIRServer : ', this.state);
+        e.preventDefault();
+        let str = e.target.value.split('$');
+        let fhirServerList = this.state.fhirServerList;
+        let removeServer = {
+            url: str[0],
+            patientId: str[1]
+        };
+        let newServerList = [];
+        for(let i in fhirServerList) {
+            if(!(fhirServerList[i].url === removeServer.url && fhirServerList[i].patientId === removeServer.patientId)) {
+                newServerList.push(fhirServerList[i]);
+            }
+        }
+
+        if(newServerList.length < 1) {
+            alert('System should have atleast on FHIR server.');
+        } else {
+            DashboardActions.changeFHIRServerList(newServerList);
+        }
     }
 }
 
