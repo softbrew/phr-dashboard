@@ -22,7 +22,7 @@ class DashboardActions extends BaseActions {
 
     static changePassword(passowrd) {
         console.log('DashboardActions changePassword : ', passowrd);
-        axios.post(`/user/pwChange/${this.getUser().username}`, passowrd, {
+        axios.put(`/user/pwChange/${this.getUser().username}`, passowrd, {
             headers: this.getHeaders()
         }).then(res => {
             console.log('/dashboard changePassword : ', res);
@@ -34,6 +34,23 @@ class DashboardActions extends BaseActions {
 
         });
     }
+
+    static changeFHIRServerList(serverList) {
+        console.log('DashboardActions changeFHIRServerList : ', serverList);
+        axios.put(`/user/${this.getUser().username}`, { fhirServerList: serverList}, {
+            headers: this.getHeaders()
+        }).then(res => {
+            console.log('/dashboard changeFHIRServerList : ', res);
+            PHRDispacher.dispatch({
+                actionType: DashboardConstants.USER_UPDATED,
+                user: res.data.user
+            });
+        }).catch(err => {
+            console.error(err);
+
+        });
+    }
+
 }
 
 export default DashboardActions;

@@ -59,6 +59,10 @@ PHRDispacher.register(action => {
             dashboardStore._setPatient(action.patient);
             dashboardStore.emitChange();
             break;
+        case DashboardConstants.USER_UPDATED:
+            dashboardStore._setPatient(action.user);
+            dashboardStore.emitChange();
+            break;
     }
     return true;
 });
