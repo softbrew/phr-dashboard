@@ -15,7 +15,8 @@ import Appointments from '../apps/appointments/index.jsx';
 import AppointmentsView from '../apps/appointments/components/Appointments.jsx';
 import NewAppointment from '../apps/appointments/components/new/NewAppointment.jsx';
 import EditAppointment from '../apps/appointments/components/new/EditAppointment.jsx';
-import MedicalRecord from '../apps/medical_record/index';
+import MedicalRecord from '../apps/medical_record/index.jsx';
+import MedicalRecordView from '../apps/medical_record/components/MedicalRecord.jsx';
 import Journal from '../apps/journal/index';
 
 export default (
@@ -27,7 +28,9 @@ export default (
                 <Route path='new' component={NewAppointment}></Route>
                 <Route path='edit' component={EditAppointment}></Route>
             </Route>
-            <Route path='medical_record' component={MedicalRecord}></Route>
+            <Route path='medical_record' component={MedicalRecord}>
+                <IndexRoute component={MedicalRecordView}></IndexRoute>
+            </Route>
             <Route path='journal' component={Journal}></Route>
         </Route>
         <Route path='settings' component={Settings}></Route>

@@ -8,16 +8,20 @@
 "use strict";
 
 import React, { PropTypes } from 'react';
+import { Router, Route, Link, IndexRoute } from 'react-router';
 
 class MedicalRecord extends React.Component {
-    render () {
+    constructor() {
+        super();
+    }
+
+    render() {
         return (
-            <div>MedicalRecord</div>
+            <div>
+                {this.props.children}
+            </div>
         );
     }
 }
-
-MedicalRecord.propTypes = {
-};
 
 export default MedicalRecord;
