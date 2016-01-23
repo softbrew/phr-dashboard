@@ -24,7 +24,7 @@ class MedicalRecord extends React.Component {
 
     componentDidMount() {
         MedicalRecordStore.addChangeListener(this._onChange.bind(this));
-        // MedicalRecordActions.getMedicalRecord();
+        MedicalRecordActions.getMedicalRecords();
     }
     componentWillUnmount() {
         MedicalRecordStore.removeChangeListener(this._onChange.bind(this));
