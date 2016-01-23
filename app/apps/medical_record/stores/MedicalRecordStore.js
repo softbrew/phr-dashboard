@@ -16,15 +16,16 @@ class MedicalRecordStore extends EventEmitter {
         super();
         this.CHANGE_EVENT = 'medicalRecords_change';
         this.medicalRecords = [];
+        this.observations = [];
     }
 
-    _addAppointment(medicalRecord) {
+    _addMedicalRecord(medicalRecord) {
         this.medicalRecords.push(medicalRecord);
     }
-    _setMedicalRecord(medicalRecords) {
+    _setMedicalRecords(medicalRecords) {
         this.medicalRecords = medicalRecords;
     }
-    _editAppointment(medicalRecord) {
+    _editMedicalReport(medicalRecord) {
         for(let i in this.medicalRecords) {
             if(medicalRecord._id === this.medicalRecords[i]._id) {
                 this.medicalRecords[i] = medicalRecord;
@@ -32,7 +33,7 @@ class MedicalRecordStore extends EventEmitter {
             }
         }
     }
-    _deleteAppointment(medicalRecord) {
+    _deleteMedicalRecord(medicalRecord) {
         for(let i in this.medicalRecords) {
             if(medicalRecord._id === this.medicalRecords[i]._id) {
                 this.medicalRecords.splice(i, 1);
@@ -41,12 +42,34 @@ class MedicalRecordStore extends EventEmitter {
         }
     }
 
-    getMedicalRecord() {
-        this.medicalRecords.sort(function(a, b) {
-            // subtract to get a value that is either negative, positive, or zero.
-            return b.createdAt - a.createdAt;
-        });
+    _addObservation(observation) {
+        this.observations.push(observation);
+    }
+    _setObservations(observations) {
+        this.observations = observations;
+    }
+    _editObservation(observation) {
+        for(let i in this.observations) {
+            if(observation._id === this.observations[i]._id) {
+                this.observations[i] = observation;
+                return this.observations;
+            }
+        }
+    }
+    _deleteObservation(observation) {
+        for(let i in this.observations) {
+            if(observation._id === this.observations[i]._id) {
+                this.observations.splice(i, 1);
+                return this.observations;
+            }
+        }
+    }
+
+    getMedicalRecords() {
         return this.medicalRecords;
+    }
+    getObservations() {
+        return this.observations;
     }
 
     emitChange() {
@@ -67,7 +90,11 @@ const medicalRecordsStore = new MedicalRecordStore();
 Dispatcher.register(action => {
     switch(action.actionType) {
         case MedicalRecordConstants.GET_MEDICAL_RECORDS:
-            medicalRecordsStore._setMedicalRecord(action.medicalRecords);
+            medicalRecordsStore._setMedicalRecords(action.medicalRecords);
+            medicalRecordsStore.emitChange();
+            break;
+        case MedicalRecordConstants.ADD_OBSERVATION:
+            medicalRecordsStore._addObservation(action.observation);
             medicalRecordsStore.emitChange();
             break;
         default:

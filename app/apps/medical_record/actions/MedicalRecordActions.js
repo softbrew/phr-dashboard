@@ -21,17 +21,46 @@ class MedicalRecordActions extends BaseActions {
 
     static getMedicalRecords() {
         console.log('MedicalRecordActions getMedicalRecords');
-        axios.get(`/apps/${MedicalRecordConstants.APP_ID}/${this.getUser().username}`, {
-            headers: this.getHeaders()
-        }).then(res => {
-            console.log('/apps getMedicalRecords : ', res);
+
+        function recursive(links, options, result, callback) {
+            console.log('call recursive: ', result);
+            let nextURL = null;
+            for(let link of links) {
+                if(link.relation === 'next') {
+                    nextURL = link.url.replace(options.fhirServerURL, '/fhir');
+                }
+            }
+            console.log('nextURL : ', nextURL);
+            if(nextURL) {
+                axios.get(nextURL, {
+                    headers: options.headers
+                }).then(res => {
+                    for(let report of res.data.entry) {
+                        result.push(report.resource);
+                    }
+                    recursive(res.data.link, options.headers, result, callback);
+                }).catch(err => {
+                    callback(err.data, result);
+                });
+            } else {
+                callback(null, result);
+            }
+        }
+
+        let initLink = [{
+            "relation": "next",
+            "url": `/fhir/DiagnosticReport?patient=14356`
+        }];
+
+        recursive(initLink, {
+            headers: this.getHeaders(),
+            fhirServerURL: this.getUser().fhirServerList[0].url
+        }, [], (err, result) => {
+            console.log('MedicalRecordActions get reports : ', err, result);
             Dispacher.dispatch({
                 actionType: MedicalRecordConstants.GET_MEDICAL_RECORDS,
-                appointments: res.data
+                medicalRecords: result
             });
-        }).catch(err => {
-            console.error(err);
-
         });
     }
 
